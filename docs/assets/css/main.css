@@ -574,6 +574,23 @@ a { color: inherit; text-decoration: none; }
   color: var(--success);
 }
 
+.contrib-status.investigating,
+.contrib-status.in-progress {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.contrib-status.merged {
+  background: var(--success-soft);
+  color: var(--success);
+  opacity: 0.85;
+}
+
+.contrib-status.closed {
+  background: var(--neutral-soft);
+  color: var(--text-dim);
+}
+
 .contrib-title {
   font-size: 1.1rem;
   font-weight: 600;

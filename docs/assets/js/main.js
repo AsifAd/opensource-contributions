@@ -39,16 +39,26 @@ async function init() {
     renderContributions(data.contributions);
     renderRoadmap(data.roadmap);
     renderTimeline(data.timeline);
-    updateMeta(data.meta, data.stats);
+    updateMeta(data.meta, data.stats, data.contributions, data.roadmap);
   } catch (err) {
     console.error('Failed to load contributions data:', err);
   }
 }
 
-function updateMeta(meta, stats) {
+function updateMeta(meta, stats, contributions = [], roadmap = []) {
   const heroStatus = document.getElementById('hero-status');
   if (heroStatus) {
-    heroStatus.textContent = `${stats.openPRs} open PR${stats.openPRs !== 1 ? 's' : ''} · Ansible active`;
+    const openPRs = stats.openPRs ?? contributions.filter(c => c.status === 'open').length;
+    const inProgress = contributions.filter(c =>
+      c.status === 'investigating' || c.status === 'in-progress'
+    ).length;
+    const activeStack = roadmap.find(r => r.status === 'active');
+
+    const parts = [];
+    if (openPRs > 0) parts.push(`${openPRs} open PR${openPRs !== 1 ? 's' : ''}`);
+    if (inProgress > 0) parts.push(`${inProgress} in progress`);
+    if (activeStack) parts.push(`${activeStack.label} active`);
+    heroStatus.textContent = parts.length ? parts.join(' · ') : 'OSS tracker — building in public';
   }
   const lastUpdated = document.getElementById('last-updated');
   if (lastUpdated && meta.updated) {
@@ -75,7 +85,7 @@ function renderContributions(contributions) {
         ${c.highlights.map(h => `<span class="contrib-tag">${h}</span>`).join('')}
       </div>
       <div class="contrib-links">
-        <a href="${c.links.pr}" target="_blank" rel="noopener" class="contrib-link">PR #${c.pr}</a>
+        ${c.links.pr && c.pr ? `<a href="${c.links.pr}" target="_blank" rel="noopener" class="contrib-link">PR #${c.pr}</a>` : ''}
         <a href="${c.links.issue}" target="_blank" rel="noopener" class="contrib-link">Issue #${c.issue}</a>
         <a href="${REPO_BASE}${c.deepDive}" target="_blank" rel="noopener" class="contrib-link">Deep dive</a>
       </div>

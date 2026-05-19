@@ -2,6 +2,8 @@
 
 How to go from a local fix to a merged PR.
 
+**Hub repo (live site):** when you start, open a PR, or merge — update [docs/assets/data/contributions.json](../docs/assets/data/contributions.json) in the same push. See [WORKFLOW.md](../WORKFLOW.md).
+
 ---
 
 ## Before You Write Code

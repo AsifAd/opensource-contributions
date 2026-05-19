@@ -32,3 +32,9 @@ Describe single recommended next item → [backlog.md](backlog.md)
 ## Isolation
 
 → [../ISOLATION.md](../ISOLATION.md) · [setup.md](setup.md)
+
+---
+
+## Site sync
+
+When status changes, update [docs/assets/data/contributions.json](../docs/assets/data/contributions.json) in the **same commit** as this folder. See [WORKFLOW.md](../WORKFLOW.md).

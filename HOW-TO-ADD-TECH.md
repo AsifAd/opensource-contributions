@@ -55,11 +55,19 @@ Optional: `work/` subfolder for per-issue write-ups (like Ansible `work/ini-file
 
 ---
 
-## 3. Update the hub
+## 3. Update the hub (site + docs — same commit)
 
-Edit [README.md](README.md):
-- Add row to **Status dashboard**
-- Add to folder tree diagram if you want
+Per [WORKFLOW.md](../WORKFLOW.md), update **in parallel**:
+
+| File | Action |
+|------|--------|
+| [README.md](README.md) | Add row to **Status dashboard** + folder tree |
+| [docs/assets/data/contributions.json](../docs/assets/data/contributions.json) | Add `roadmap[]` entry (`placeholder` → `planned` when issue picked) |
+| `<tech>/README.md` | Set status Active/Planned when you start |
+
+When you begin work on an issue, add a `contributions[]` entry with `"status": "investigating"` and push — the [live site](https://asifad.github.io/opensource-contributions/) updates in ~20s.
+
+JSON schema: [docs/assets/data/README.md](../docs/assets/data/README.md)
 
 ---
 

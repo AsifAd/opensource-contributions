@@ -6,6 +6,9 @@ Personal hub for tracking upstream OSS work across Ansible, Argo CD, NiFi, Vault
 **Portfolio:** [asifad.github.io](https://asifad.github.io)  
 **GitHub:** [AsifAd](https://github.com/AsifAd)
 
+> **Working style:** update markdown notes and [`contributions.json`](docs/assets/data/contributions.json) in the **same commit** as you work — push to `main` and the site goes live in ~20s.  
+> Full playbook → **[WORKFLOW.md](WORKFLOW.md)**
+
 ---
 
 ## What's here
@@ -52,17 +55,21 @@ Every technology folder follows the same shape:
 
 ---
 
-## Site
+## Site (live dashboard)
 
-The [`docs/`](docs/) folder powers the GitHub Pages dashboard:
+The [`docs/`](docs/) folder powers GitHub Pages. **It updates automatically on every push to `main`.**
 
-- Warm editorial UI with dark/light theme toggle
-- Live contribution cards with PR/issue links
-- Filterable technology roadmap
-- Contribution timeline
-- Links to [portfolio](https://asifad.github.io) and GitHub
+| You do | Site shows |
+|--------|------------|
+| Start investigating an issue | *Investigating* badge on new card |
+| Branch + tests, no PR yet | *In progress* |
+| Open upstream PR | *PR Open*, stats + timeline update |
+| Merge PR | *Merged*, timeline entry |
 
-**Update site data:** edit [`docs/assets/data/contributions.json`](docs/assets/data/contributions.json)
+**Edit:** [`docs/assets/data/contributions.json`](docs/assets/data/contributions.json) — schema in [`docs/assets/data/README.md`](docs/assets/data/README.md)  
+**How/when to edit:** [WORKFLOW.md](WORKFLOW.md)
+
+Features: dark/light theme, contribution cards, filterable roadmap, timeline, portfolio links.
 
 ### E2E tests
 
@@ -97,7 +104,8 @@ All OSS work stays off work/personal tooling. See [ISOLATION.md](ISOLATION.md).
 
 1. Copy `_template/` → `<tech-name>/`
 2. Fill in README, setup, testing, backlog
-3. Add a row to `docs/assets/data/contributions.json` roadmap
+3. Add roadmap row to `docs/assets/data/contributions.json`
 4. Update this README status table
+5. Commit + push → site deploys automatically
 
-Details: [HOW-TO-ADD-TECH.md](HOW-TO-ADD-TECH.md)
+Details: [HOW-TO-ADD-TECH.md](HOW-TO-ADD-TECH.md) · live updates: [WORKFLOW.md](WORKFLOW.md)
