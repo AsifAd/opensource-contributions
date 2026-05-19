@@ -19,7 +19,7 @@ Personal hub for tracking upstream OSS work across Ansible, Argo CD, NiFi, Vault
 |------|-------------|
 | [`docs/`](docs/) | GitHub Pages site — animated dashboard of contributions & roadmap |
 | [`ansible/`](ansible/) | **Active** — community.general PRs (#12083, #12085) |
-| [`argocd/`](argocd/) | **Active** — AppSet UI #27931 open; #27798 Refresh investigating |
+| [`argocd/`](argocd/) | **Active** — PRs #27931, #27932 open |
 | [`nifi/`](nifi/) | Planned — Apache NiFi upstream |
 | [`vault/`](vault/) | Planned — Vault / OpenBao |
 | [`kubernetes/`](kubernetes/) | Placeholder |
@@ -48,7 +48,7 @@ Every technology folder follows the same shape:
 | Tech | Status | Open PRs | Next up |
 |------|--------|----------|---------|
 | **Ansible** | **Active** | [#12083](https://github.com/ansible-collections/community.general/pull/12083), [#12085](https://github.com/ansible-collections/community.general/pull/12085) | Keycloak #11747 |
-| **Argo CD** | **Active** | [#27931](https://github.com/argoproj/argo-cd/pull/27931) | AppSet Refresh #27798 |
+| **Argo CD** | **Active** | [#27931](https://github.com/argoproj/argo-cd/pull/27931), [#27932](https://github.com/argoproj/argo-cd/pull/27932) | Await review |
 | **NiFi** | Planned | — | Provenance repo corruption upstream |
 | **Vault** | Planned | — | hashi_vault docs or OpenBao |
 | **Kubernetes** | Placeholder | — | k8s docs or kubernetes.core |

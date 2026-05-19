@@ -10,7 +10,7 @@
   },
   "stats": {
     "activeProjects": 2,
-    "openPRs": 3,
+    "openPRs": 4,
     "plannedStacks": 5,
     "unitTests": 163
   },
@@ -85,18 +85,18 @@
       "module": "ui/appset",
       "title": "ApplicationSet Refresh button",
       "issue": 27798,
-      "pr": null,
+      "pr": 27932,
       "branch": "feat/appset-refresh-ui-27798",
-      "status": "investigating",
-      "statusLabel": "Investigating",
+      "status": "open",
+      "statusLabel": "PR Open",
       "repo": "argoproj/argo-cd",
       "fork": "AsifAd/argo-cd",
-      "summary": "Expose ApplicationSet refresh via API + UI — patch argocd.argoproj.io/application-set-refresh annotation instead of kubectl workaround.",
-      "highlights": ["Controller logic exists", "API + UI gap", "Git generator cache bypass"],
+      "summary": "Refresh RPC + UI for ApplicationSets — patches argocd.argoproj.io/application-set-refresh instead of kubectl annotate workaround.",
+      "highlights": ["PR #27932 open", "165 UI tests pass", "TestRefreshAppSet 4/4"],
       "deepDive": "argocd/work/27798.md",
       "links": {
         "issue": "https://github.com/argoproj/argo-cd/issues/27798",
-        "pr": null
+        "pr": "https://github.com/argoproj/argo-cd/pull/27932"
       }
     }
   ],
@@ -118,10 +118,10 @@
       "status": "active",
       "icon": "🔄",
       "color": "#EF7B4D",
-      "nextUp": "#27798 — AppSet Refresh button (API + UI)",
+      "nextUp": "Await review — #27931 namespaced UI, #27932 Refresh",
       "fork": "https://github.com/AsifAd/argo-cd",
       "docs": "argocd/README.md",
-      "openPRs": 1
+      "openPRs": 2
     },
     {
       "tech": "nifi",
@@ -180,6 +180,13 @@
     }
   ],
   "timeline": [
+    {
+      "date": "2026-05",
+      "title": "AppSet Refresh #27932",
+      "description": "Opened PR — Refresh RPC + UI button for ApplicationSets (fixes #27798).",
+      "type": "pr",
+      "link": "https://github.com/argoproj/argo-cd/pull/27932"
+    },
     {
       "date": "2026-05",
       "title": "AppSet Refresh #27798 — investigating",

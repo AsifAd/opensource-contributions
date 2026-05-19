@@ -2,7 +2,7 @@
 
 Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd) (GitOps).
 
-**Status:** **Active** — [#27931](https://github.com/argoproj/argo-cd/pull/27931) open; investigating [#27798](https://github.com/argoproj/argo-cd/issues/27798)  
+**Status:** **Active** — PRs [#27931](https://github.com/argoproj/argo-cd/pull/27931), [#27932](https://github.com/argoproj/argo-cd/pull/27932) open  
 **GitHub:** [AsifAd](https://github.com/AsifAd)  
 **Fork:** https://github.com/AsifAd/argo-cd  
 **Clone path:** `~/oss/argo-cd` (isolated from work dirs)
@@ -24,7 +24,7 @@ Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd) (GitOps
 | Issue | PR | Status |
 |-------|-----|--------|
 | [#27928](https://github.com/argoproj/argo-cd/issues/27928) | [#27931](https://github.com/argoproj/argo-cd/pull/27931) | **PR Open** — AppSet UI outside default namespace |
-| [#27798](https://github.com/argoproj/argo-cd/issues/27798) | — | **Investigating** — AppSet Refresh button (API + UI) |
+| [#27798](https://github.com/argoproj/argo-cd/issues/27798) | [#27932](https://github.com/argoproj/argo-cd/pull/27932) | **PR Open** — AppSet Refresh button (API + UI) |
 
 ---
 
