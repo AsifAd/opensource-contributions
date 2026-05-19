@@ -17,8 +17,8 @@
 
 ### Checklist
 
-- [ ] Comment on #2809 (reproducing on isolated Kind + Helm Jenkins, planning PR solo)
-- [ ] Fork + clone to `~/oss/kubernetes-plugin`
+- [x] Comment on #2809 (reproducing on isolated Kind + Helm Jenkins, planning PR solo)
+- [x] Fork + clone to `~/oss/kubernetes-plugin` — branch `fix/no-reconnect-after-multi-container-2809`
 - [ ] Repro: jnlp exits, sidecar keeps pod Running
 - [ ] Implement fix + unit tests
 - [ ] `mvn verify` green

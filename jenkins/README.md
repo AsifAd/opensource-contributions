@@ -4,8 +4,9 @@ Contributions to [jenkinsci/kubernetes-plugin](https://github.com/jenkinsci/kube
 
 **Status:** **Active** — investigating [#2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) (solo)  
 **GitHub:** [AsifAd](https://github.com/AsifAd)  
-**Fork:** https://github.com/AsifAd/kubernetes-plugin *(create on first push)*  
-**Clone path:** `~/oss/kubernetes-plugin` (isolated — no work Jenkins, no corp kubeconfig)
+**Fork:** https://github.com/AsifAd/kubernetes-plugin  
+**Clone path:** `~/oss/kubernetes-plugin` (isolated — no work Jenkins, no corp kubeconfig)  
+**Branch:** `fix/no-reconnect-after-multi-container-2809`
 
 | Doc | What |
 |-----|------|
