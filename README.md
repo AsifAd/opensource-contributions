@@ -20,7 +20,7 @@ Personal hub for tracking upstream OSS work across Ansible, Argo CD, Jenkins, Ni
 | [`docs/`](docs/) | GitHub Pages site — animated dashboard of contributions & roadmap |
 | [`ansible/`](ansible/) | **Active** — community.general PRs (#12083, #12085) |
 | [`argocd/`](argocd/) | **Active** — PRs #27931, #27932 open |
-| [`jenkins/`](jenkins/) | **Active** — kubernetes-plugin #2809 investigating (solo) |
+| [`jenkins/`](jenkins/) | **Active** — kubernetes-plugin #2809 in progress (solo) |
 | [`nifi/`](nifi/) | Planned — Apache NiFi upstream |
 | [`vault/`](vault/) | Planned — Vault / OpenBao |
 | [`kubernetes/`](kubernetes/) | Placeholder |
@@ -50,7 +50,7 @@ Every technology folder follows the same shape:
 |------|--------|----------|---------|
 | **Ansible** | **Active** | [#12083](https://github.com/ansible-collections/community.general/pull/12083), [#12085](https://github.com/ansible-collections/community.general/pull/12085) | Keycloak #11747 |
 | **Argo CD** | **Active** | [#27931](https://github.com/argoproj/argo-cd/pull/27931), [#27932](https://github.com/argoproj/argo-cd/pull/27932) | Await review |
-| **Jenkins** | **Active** | — | [kubernetes-plugin #2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) — multi-container zombie pods |
+| **Jenkins** | **Active** | — | [kubernetes-plugin #2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) — agent-exit pod delete fix in progress |
 | **NiFi** | Planned | — | Provenance repo corruption upstream |
 | **Vault** | Planned | — | hashi_vault docs or OpenBao |
 | **Kubernetes** | Placeholder | — | k8s docs or kubernetes.core |

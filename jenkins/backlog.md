@@ -10,7 +10,7 @@
 
 | Issue | PR | Branch | Status | Tests |
 |-------|-----|--------|--------|-------|
-| [#2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) `-noReconnectAfter` ineffective with multiple containers | — | `fix/no-reconnect-after-multi-container-2809` | **Investigating** | `mvn verify` + Kind manual repro |
+| [#2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) `-noReconnectAfter` ineffective with multiple containers | — | `fix/no-reconnect-after-multi-container-2809` | **In progress** | `PodUtils` + `_terminate` fix; `mvn verify` + Kind repro |
 
 **Fork:** https://github.com/AsifAd/kubernetes-plugin  
 **Deep dive:** [work/2809.md](work/2809.md)
@@ -19,8 +19,8 @@
 
 - [x] Comment on #2809 (reproducing on isolated Kind + Helm Jenkins, planning PR solo)
 - [x] Fork + clone to `~/oss/kubernetes-plugin` — branch `fix/no-reconnect-after-multi-container-2809`
-- [ ] Repro: jnlp exits, sidecar keeps pod Running
-- [ ] Implement fix + unit tests
+- [ ] Repro: jnlp exits, sidecar keeps pod Running (Kind — needs isolated Java/Maven)
+- [x] Implement fix + unit tests (`PodUtils.isAgentContainerTerminated`, `_terminate` override)
 - [ ] `mvn verify` green
 - [ ] Open PR → update `contributions.json` (`status`: `open`, `pr`: number)
 

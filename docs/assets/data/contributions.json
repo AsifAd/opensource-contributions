@@ -108,12 +108,12 @@
       "issue": 2809,
       "pr": null,
       "branch": "fix/no-reconnect-after-multi-container-2809",
-      "status": "investigating",
-      "statusLabel": "Investigating",
+      "status": "in-progress",
+      "statusLabel": "In progress",
       "repo": "jenkinsci/kubernetes-plugin",
       "fork": "AsifAd/kubernetes-plugin",
       "summary": "-noReconnectAfter stops jnlp after build, but multi-container pods (docker/sidecars) stay Running — cluster resource leak. Solo fix on isolated Kind + Helm.",
-      "highlights": ["No competing PR", "Matches K8s CI agent shape", "mvn verify + manual repro"],
+      "highlights": ["Fix in KubernetesSlave._terminate", "PodUtils agent-exit detection", "mvn verify + Kind repro pending"],
       "deepDive": "jenkins/work/2809.md",
       "links": {
         "issue": "https://github.com/jenkinsci/kubernetes-plugin/issues/2809",
@@ -215,7 +215,7 @@
     {
       "date": "2026-05",
       "title": "Jenkins kubernetes-plugin #2809",
-      "description": "Investigating — zombie multi-container agent pods after -noReconnectAfter; isolated Kind repro.",
+      "description": "In progress — delete pod when jnlp exits with sidecars still Running (#2809); unit tests added, Kind repro next.",
       "type": "planned",
       "link": "https://github.com/jenkinsci/kubernetes-plugin/issues/2809"
     },

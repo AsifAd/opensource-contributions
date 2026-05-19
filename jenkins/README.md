@@ -2,7 +2,7 @@
 
 Contributions to [jenkinsci/kubernetes-plugin](https://github.com/jenkinsci/kubernetes-plugin) (Kubernetes agents on Jenkins).
 
-**Status:** **Active** — investigating [#2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) (solo)  
+**Status:** **Active** — in progress on [#2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) (solo)  
 **GitHub:** [AsifAd](https://github.com/AsifAd)  
 **Fork:** https://github.com/AsifAd/kubernetes-plugin  
 **Clone path:** `~/oss/kubernetes-plugin` (isolated — no work Jenkins, no corp kubeconfig)  
@@ -21,7 +21,7 @@ Contributions to [jenkinsci/kubernetes-plugin](https://github.com/jenkinsci/kube
 
 | Issue | PR | Status |
 |-------|-----|--------|
-| [#2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) | — | **Investigating** — sidecar pods stay Running after jnlp exits |
+| [#2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) | — | **In progress** — delete pod when agent container exits with sidecars still Running |
 
 ---
 
