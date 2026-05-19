@@ -20,7 +20,8 @@ test.describe("SEO and assets", () => {
     expect(data.contributions.length).toBeGreaterThanOrEqual(2);
     expect(data.roadmap.length).toBe(7);
     expect(data.timeline.length).toBeGreaterThanOrEqual(4);
-    expect(data.stats.openPRs).toBe(2);
+    const openFromContributions = data.contributions.filter((c) => c.status === "open").length;
+    expect(data.stats.openPRs).toBe(openFromContributions);
     expect(data.meta.portfolio).toBe("https://asifad.github.io");
   });
 

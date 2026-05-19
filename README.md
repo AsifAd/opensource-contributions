@@ -48,7 +48,7 @@ Every technology folder follows the same shape:
 | Tech | Status | Open PRs | Next up |
 |------|--------|----------|---------|
 | **Ansible** | **Active** | [#12083](https://github.com/ansible-collections/community.general/pull/12083), [#12085](https://github.com/ansible-collections/community.general/pull/12085) | Keycloak #11747 |
-| **Argo CD** | **Active** | — | AppSet UI #27928 (namespaced namespace) |
+| **Argo CD** | **Active** | [#27931](https://github.com/argoproj/argo-cd/pull/27931) | AppSet UI #27928 |
 | **NiFi** | Planned | — | Provenance repo corruption upstream |
 | **Vault** | Planned | — | hashi_vault docs or OpenBao |
 | **Kubernetes** | Placeholder | — | k8s docs or kubernetes.core |

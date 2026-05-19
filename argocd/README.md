@@ -22,7 +22,7 @@ Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd) (GitOps
 
 | Issue | PR | Status |
 |-------|-----|--------|
-| [#27928](https://github.com/argoproj/argo-cd/issues/27928) | — | **Investigating** — AppSet UI outside default namespace |
+| [#27928](https://github.com/argoproj/argo-cd/issues/27928) | [#27931](https://github.com/argoproj/argo-cd/pull/27931) | **PR Open** — AppSet UI outside default namespace |
 
 ---
 

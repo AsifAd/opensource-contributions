@@ -10,7 +10,7 @@ Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd).
 
 | Issue | PR | Status | Notes |
 |-------|-----|--------|-------|
-| [#27928](https://github.com/argoproj/argo-cd/issues/27928) | — | **Investigating** | AppSet UI broken outside default namespace → [work/27928.md](work/27928.md) |
+| [#27928](https://github.com/argoproj/argo-cd/issues/27928) | [#27931](https://github.com/argoproj/argo-cd/pull/27931) | **PR Open** | AppSet UI namespaced namespace → [work/27928.md](work/27928.md) |
 
 ---
 

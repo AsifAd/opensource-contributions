@@ -10,7 +10,7 @@
   },
   "stats": {
     "activeProjects": 2,
-    "openPRs": 2,
+    "openPRs": 3,
     "plannedStacks": 5,
     "unitTests": 163
   },
@@ -64,18 +64,18 @@
       "module": "ui/appset",
       "title": "AppSet UI broken outside default namespace",
       "issue": 27928,
-      "pr": null,
+      "pr": 27931,
       "branch": "fix/appset-ui-namespaced-27928",
-      "status": "investigating",
-      "statusLabel": "Investigating",
+      "status": "open",
+      "statusLabel": "PR Open",
       "repo": "argoproj/argo-cd",
       "fork": "AsifAd/argo-cd",
-      "summary": "ApplicationSet detail view fails when the AppSet is not in the argocd namespace but the control plane manages that namespace via application.namespaces.",
-      "highlights": ["Repro on public demo", "component:ui/appset", "Namespaced GitOps"],
+      "summary": "Fixed UI sending appNamespace instead of appsetNamespace on ApplicationSet GET/watch/resource-tree — namespaced AppSet detail view failed to load.",
+      "highlights": ["PR #27931 open", "4 unit tests added", "Fixes namespaced AppSet UI"],
       "deepDive": "argocd/work/27928.md",
       "links": {
         "issue": "https://github.com/argoproj/argo-cd/issues/27928",
-        "pr": null
+        "pr": "https://github.com/argoproj/argo-cd/pull/27931"
       }
     }
   ],
@@ -100,7 +100,7 @@
       "nextUp": "#27928 — AppSet UI namespaced namespace fix",
       "fork": "https://github.com/AsifAd/argo-cd",
       "docs": "argocd/README.md",
-      "openPRs": 0
+      "openPRs": 1
     },
     {
       "tech": "nifi",
@@ -161,10 +161,10 @@
   "timeline": [
     {
       "date": "2026-05",
-      "title": "Argo CD AppSet UI #27928",
-      "description": "Started investigating namespaced ApplicationSet detail view failure (application.namespaces).",
-      "type": "planned",
-      "link": "https://github.com/argoproj/argo-cd/issues/27928"
+      "title": "Argo CD AppSet UI fix #27931",
+      "description": "Opened PR fixing namespaced ApplicationSet detail view — appsetNamespace query params.",
+      "type": "pr",
+      "link": "https://github.com/argoproj/argo-cd/pull/27931"
     },
     {
       "date": "2026-05",
