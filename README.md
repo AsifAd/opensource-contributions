@@ -73,13 +73,15 @@ Features: dark/light theme, contribution cards, filterable roadmap, timeline, po
 
 ### E2E tests
 
+**Required before every push** that touches JSON, HTML, CSS, or JS. Run the full suite — all 96 tests, all projects:
+
 ```bash
 npm ci
 npx playwright install chromium
 npm run test:e2e
 ```
 
-Playwright serves `docs/` locally and runs full browser tests (navigation, theme, contributions, roadmap, timeline, stats, mobile, SEO, data integrity). CI runs on every push to `main`.
+Covers: homepage, theme, navigation, contributions, roadmap filters, timeline, stats, SEO, data integrity, mobile, reduced-motion. See [WORKFLOW.md](WORKFLOW.md#verify-before-you-walk-away-mandatory--miss-nothing) for the complete checklist.
 
 ---
 

@@ -7,14 +7,13 @@ alwaysApply: true
 
 **Trigger:** Run ONLY when the user message is exactly `/oss-flow` or starts with `/oss-flow`. Otherwise ignore this rule.
 
-This repo IS the hub. Site data: `docs/assets/data/contributions.json` · Playbook: `WORKFLOW.md`
+Follow `~/.cursor/commands/oss-flow.md` in full. Hub: `OpenSource/` · JSON: `docs/assets/data/contributions.json` · Playbook: `WORKFLOW.md`
 
-**On trigger:** Read JSON + active tech docs → print status summary → run subcommand or ask stage (`start` | `progress` | `pr-open` | `merged` | `sync` | `status`).
+**Testing is mandatory before every push — miss nothing:**
+- Upstream: all unit tests + edge cases + check/diff/idempotency per `<tech>/testing.md`
+- Hub: full `npm run test:e2e` (96 tests, all projects) when JSON/site files change
+- JSON sanity: stats, PR counts, timeline, meta.updated
+- Manual smoke: preview, theme toggle, filters, links, mobile nav
+- CI must be green after push — fix immediately if red
 
-**Subcommands:** `start <issue>` (investigating), `progress` (in-progress), `pr-open`, `merged`, `sync` (reconcile drift).
-
-**Same commit:** `<tech>/backlog.md`, `<tech>/README.md`, `work/<issue>.md`, `contributions.json`, root `README.md`.
-
-**Finish:** `npm run test:e2e` if json/site changed → commit → push `main` → live ~20s.
-
-Full steps: `WORKFLOW.md`
+**Finish:** commit → push `main` → site live ~20s

@@ -190,22 +190,57 @@ Funny is fine. Clear is better.
 
 ---
 
-## Verify before you walk away
+## Verify before you walk away (mandatory — miss nothing)
+
+Testing is **not optional**. Do not push until every applicable section below is green.
+
+### Upstream code (when coding or opening PR)
+
+Follow `<tech>/testing.md`. Run **all** relevant tests:
+
+- Repro: fails before fix, passes after
+- New regression tests for the exact bug + every edge case in the issue
+- Idempotency, check mode, diff mode (when the module supports them)
+- Full module unit test file — not just the new test
+- Manual repro on real runtime when the issue requires it (document commands in `work/<issue>.md`)
+
+**No upstream PR until upstream tests pass.**
+
+### Hub site — full E2E (when JSON, HTML, CSS, or JS changed)
 
 ```bash
-# Local preview
-npm run preview
-# → http://localhost:4173
-
-# E2E (optional, runs in CI anyway)
-npm run test:e2e
+cd OpenSource
+npm run test:e2e    # all 96 tests — desktop + mobile + reduced-motion
 ```
 
-After push, check:
+Do not run a subset. Do not skip for "small JSON edits." All spec files must pass:
 
-1. [Actions → Deploy GitHub Pages](https://github.com/AsifAd/opensource-contributions/actions) — green
-2. [Live site](https://asifad.github.io/opensource-contributions/) — hard refresh
-3. Hero status line matches your JSON (`stats.openPRs`, active stack)
+`homepage` · `theme` · `navigation` · `contributions` · `roadmap` · `timeline` · `stats` · `seo` · `data` · `mobile` · `reduced-motion`
+
+### JSON sanity (every `contributions.json` edit)
+
+- `stats.openPRs` === count of `status: "open"` contributions
+- Roadmap `openPRs` per stack match reality
+- `pr` / `links.pr` null until PR exists; set when opened
+- `meta.updated` bumped to today
+- Timeline entries correct (type, link, date)
+- Hero status line matches JSON after reload
+
+### Manual smoke (after E2E green)
+
+```bash
+npm run preview   # → http://localhost:4173
+```
+
+Hard refresh. Toggle dark/light. Click all roadmap filters. Verify changed cards, links, and stats. Check mobile hamburger menu.
+
+### After push
+
+1. [Actions → E2E Tests](https://github.com/AsifAd/opensource-contributions/actions) — green
+2. [Actions → Deploy GitHub Pages](https://github.com/AsifAd/opensource-contributions/actions) — green
+3. [Live site](https://asifad.github.io/opensource-contributions/) — hard refresh, spot-check
+
+**If CI fails after push, fix immediately. Do not leave red.**
 
 ---
 
@@ -221,7 +256,7 @@ After push, check:
 
 Your [portfolio](https://asifad.github.io) links here — keeping this repo current is keeping your public OSS story current.
 
-**Cursor:** type `/oss-flow` in chat to run the live-sync workflow (see `.cursor/rules/oss-flow.mdc`).
+**Cursor:** type `/oss-flow` in chat to run the live-sync workflow (see `~/.cursor/commands/oss-flow.md`).
 
 ---
 
