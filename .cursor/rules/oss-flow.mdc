@@ -7,13 +7,10 @@ alwaysApply: true
 
 **Trigger:** Run ONLY when the user message is exactly `/oss-flow` or starts with `/oss-flow`. Otherwise ignore this rule.
 
-Follow `~/.cursor/commands/oss-flow.md` in full. Hub: `OpenSource/` · JSON: `docs/assets/data/contributions.json` · Playbook: `WORKFLOW.md`
+Follow `~/.cursor/commands/oss-flow.md` in full.
 
-**Testing is mandatory before every push — miss nothing:**
-- Upstream: all unit tests + edge cases + check/diff/idempotency per `<tech>/testing.md`
-- Hub: full `npm run test:e2e` (96 tests, all projects) when JSON/site files change
-- JSON sanity: stats, PR counts, timeline, meta.updated
-- Manual smoke: preview, theme toggle, filters, links, mobile nav
-- CI must be green after push — fix immediately if red
+**Identity (STRICT):** Run `gh api user -q .login` — must be `AsifAd`. Any other account → STOP, print error, tell user to `gh auth switch`. Re-check before every commit/push/PR.
 
-**Finish:** commit → push `main` → site live ~20s
+**Testing is mandatory before every push — miss nothing:** upstream tests, full E2E (96 tests), JSON sanity, manual smoke, CI green after push.
+
+**Finish:** identity check → commit → push `main` → site live ~20s

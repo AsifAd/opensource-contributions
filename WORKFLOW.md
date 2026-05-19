@@ -4,6 +4,8 @@ This repo is **two things at once**: your private engineering notes *and* a publ
 
 **Rule:** update the hub in the **same commit** as your notes — not after the PR merges, not “when you remember.” The site deploys automatically on every push to `main` (~20 seconds).
 
+**Account rule:** all commits, pushes, and upstream PRs use GitHub account **`AsifAd` only**. Verify before every git/gh action. Wrong account → stop and switch (`gh auth switch`).
+
 ---
 
 ## Philosophy
@@ -27,6 +29,30 @@ git push origin main
 ```
 
 No manual deploy. No separate “publish” step. Edit → commit → push → live.
+
+---
+
+## GitHub identity (strict)
+
+**Only `AsifAd` may commit, push, or open PRs** for OSS hub and upstream work.
+
+Before any commit, push, or `gh pr create`:
+
+```bash
+gh api user -q .login   # must output: AsifAd
+```
+
+If the result is anything else — **STOP**. Do not commit. Do not push. Do not open a PR.
+
+```text
+❌ Wrong GitHub account: <current> — required: AsifAd
+   Run: gh auth switch
+   Verify: gh api user -q .login
+```
+
+Re-check identity again immediately before push, even if you checked at the start of the session.
+
+Upstream forks must be under `AsifAd/` (e.g. `AsifAd/community.general`).
 
 ---
 
