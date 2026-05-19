@@ -9,8 +9,8 @@ alwaysApply: true
 
 Follow `~/.cursor/commands/oss-flow.md` in full.
 
-**Identity (STRICT):** Run `gh api user -q .login` — must be `AsifAd`. Any other account → STOP, print error, tell user to `gh auth switch`. Re-check before every commit/push/PR.
+**Isolation (MOST IMPORTANT):** Upstream tests/repro ONLY in isolated envs (`~/dev/`, `~/oss/`, venv, VM, Docker). NEVER install global tools or modify this machine's work/system setup. If not isolated → STOP. See `OpenSource/ISOLATION.md`.
 
-**Testing is mandatory before every push — miss nothing:** upstream tests, full E2E (96 tests), JSON sanity, manual smoke, CI green after push.
+**Identity (STRICT):** `gh api user -q .login` must be `AsifAd` — else STOP, `gh auth switch`. Re-check before commit/push/PR.
 
-**Finish:** identity check → commit → push `main` → site live ~20s
+**Testing mandatory before push** — full E2E + all upstream scenarios in isolated env only.

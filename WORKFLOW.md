@@ -6,6 +6,8 @@ This repo is **two things at once**: your private engineering notes *and* a publ
 
 **Account rule:** all commits, pushes, and upstream PRs use GitHub account **`AsifAd` only**. Verify before every git/gh action. Wrong account → stop and switch (`gh auth switch`).
 
+**Isolation rule (most important):** all upstream tests and repros run in **isolated envs only** (venv, VM, Docker under `~/dev/` or `~/oss/`). **Never install global tools or modify this machine's work/system setup.** See [ISOLATION.md](ISOLATION.md).
+
 ---
 
 ## Philosophy
@@ -222,7 +224,9 @@ Testing is **not optional**. Do not push until every applicable section below is
 
 ### Upstream code (when coding or opening PR)
 
-Follow `<tech>/testing.md`. Run **all** relevant tests:
+**Isolated env only** — read [ISOLATION.md](ISOLATION.md) and `<tech>/setup.md` first. Never run ansible-test, integration repro, or runtime validation on system Python, work kube contexts, or global installs on this Mac.
+
+Follow `<tech>/testing.md`. Run **all** relevant tests inside the isolated env:
 
 - Repro: fails before fix, passes after
 - New regression tests for the exact bug + every edge case in the issue

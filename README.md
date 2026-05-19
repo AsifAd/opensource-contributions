@@ -8,6 +8,7 @@ Personal hub for tracking upstream OSS work across Ansible, Argo CD, NiFi, Vault
 
 > **Working style:** update markdown notes and [`contributions.json`](docs/assets/data/contributions.json) in the **same commit** as you work — push to `main` and the site goes live in ~20s.  
 > **Account:** GitHub user must be **`AsifAd`** for all commits/pushes/PRs — verify with `gh api user -q .login`.  
+> **Isolation:** upstream tests/repro **only in isolated envs** (`~/dev/`, `~/oss/`, venv, VM, Docker) — never modify this machine's system/work setup. See [ISOLATION.md](ISOLATION.md).  
 > Full playbook → **[WORKFLOW.md](WORKFLOW.md)** · slash command → **`/oss-flow`**
 
 ---
