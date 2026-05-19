@@ -22,7 +22,7 @@ test.describe("stats", () => {
     const cards = page.locator(".stat-card");
     await expect(cards.nth(0).locator(".stat-value")).toHaveText(String(data.stats.activeProjects));
     await expect(cards.nth(1).locator(".stat-value")).toHaveText(String(data.stats.openPRs));
-    await expect(cards.nth(2).locator(".stat-value")).toHaveText("7");
+    await expect(cards.nth(2).locator(".stat-value")).toHaveText(String(data.roadmap.length));
     await expect(cards.nth(3).locator(".stat-value")).toHaveText(`${data.stats.unitTests}+`);
   });
 

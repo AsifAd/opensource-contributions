@@ -13,7 +13,7 @@ Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd) (GitOps
 | [testing.md](testing.md) | Unit / local / e2e tiers + isolation recipes |
 | [backlog.md](backlog.md) | Planned & in-flight issues |
 | [work/27928.md](work/27928.md) | AppSet UI namespaced namespace — PR #27931 |
-| [work/27798.md](work/27798.md) | AppSet Refresh button — investigating |
+| [work/27798.md](work/27798.md) | AppSet Refresh — PR #27932 CI green |
 
 **Related work notes:** [../../Issues/fileparser-argo-issue/](../../Issues/fileparser-argo-issue/) (internal infra; not upstream)
 
@@ -24,7 +24,7 @@ Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd) (GitOps
 | Issue | PR | Status |
 |-------|-----|--------|
 | [#27928](https://github.com/argoproj/argo-cd/issues/27928) | [#27931](https://github.com/argoproj/argo-cd/pull/27931) | **PR Open** — AppSet UI outside default namespace |
-| [#27798](https://github.com/argoproj/argo-cd/issues/27798) | [#27932](https://github.com/argoproj/argo-cd/pull/27932) | **PR Open** — AppSet Refresh button (API + UI) |
+| [#27798](https://github.com/argoproj/argo-cd/issues/27798) | [#27932](https://github.com/argoproj/argo-cd/pull/27932) | **PR Open** — AppSet Refresh (CI green after mixed-list fix) |
 
 ---
 

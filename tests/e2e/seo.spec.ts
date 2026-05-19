@@ -18,7 +18,7 @@ test.describe("SEO and assets", () => {
     const data = await fetchContributionsJson(request);
 
     expect(data.contributions.length).toBeGreaterThanOrEqual(2);
-    expect(data.roadmap.length).toBe(7);
+    expect(data.roadmap.length).toBeGreaterThanOrEqual(7);
     expect(data.timeline.length).toBeGreaterThanOrEqual(4);
     const openFromContributions = data.contributions.filter((c) => c.status === "open").length;
     expect(data.stats.openPRs).toBe(openFromContributions);

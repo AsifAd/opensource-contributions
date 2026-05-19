@@ -5,13 +5,13 @@
     "portfolio": "https://asifad.github.io",
     "portfolioLabel": "Portfolio",
     "tagline": "Open Source Contributions Hub",
-    "description": "Tracking OSS work across Ansible, Argo CD, NiFi, Vault, Kubernetes, Docker, and Terraform.",
+    "description": "Tracking OSS work across Ansible, Argo CD, Jenkins, NiFi, Vault, Kubernetes, Docker, and Terraform.",
     "updated": "2026-05-20"
   },
   "stats": {
-    "activeProjects": 2,
+    "activeProjects": 3,
     "openPRs": 4,
-    "plannedStacks": 5,
+    "plannedStacks": 8,
     "unitTests": 163
   },
   "contributions": [
@@ -91,12 +91,33 @@
       "statusLabel": "PR Open",
       "repo": "argoproj/argo-cd",
       "fork": "AsifAd/argo-cd",
-      "summary": "Refresh RPC + UI for ApplicationSets — patches argocd.argoproj.io/application-set-refresh instead of kubectl annotate workaround.",
-      "highlights": ["PR #27932 open", "165 UI tests pass", "TestRefreshAppSet 4/4"],
+      "summary": "Refresh RPC + UI for ApplicationSets. CI green after wiring Refresh through mixed /applications list views (applications-tiles/table).",
+      "highlights": ["PR #27932 CI green", "165 UI tests + pnpm lint pass", "Mixed /applications list fix"],
       "deepDive": "argocd/work/27798.md",
       "links": {
         "issue": "https://github.com/argoproj/argo-cd/issues/27798",
         "pr": "https://github.com/argoproj/argo-cd/pull/27932"
+      }
+    },
+    {
+      "id": "k8s-no-reconnect-2809",
+      "tech": "jenkins",
+      "techLabel": "Jenkins",
+      "module": "kubernetes-plugin",
+      "title": "Fix zombie pods when jnlp exits with sidecars",
+      "issue": 2809,
+      "pr": null,
+      "branch": "fix/no-reconnect-after-multi-container-2809",
+      "status": "investigating",
+      "statusLabel": "Investigating",
+      "repo": "jenkinsci/kubernetes-plugin",
+      "fork": "AsifAd/kubernetes-plugin",
+      "summary": "-noReconnectAfter stops jnlp after build, but multi-container pods (docker/sidecars) stay Running — cluster resource leak. Solo fix on isolated Kind + Helm.",
+      "highlights": ["No competing PR", "Matches K8s CI agent shape", "mvn verify + manual repro"],
+      "deepDive": "jenkins/work/2809.md",
+      "links": {
+        "issue": "https://github.com/jenkinsci/kubernetes-plugin/issues/2809",
+        "pr": null
       }
     }
   ],
@@ -122,6 +143,17 @@
       "fork": "https://github.com/AsifAd/argo-cd",
       "docs": "argocd/README.md",
       "openPRs": 2
+    },
+    {
+      "tech": "jenkins",
+      "label": "Jenkins",
+      "status": "active",
+      "icon": "🔧",
+      "color": "#D33833",
+      "nextUp": "kubernetes-plugin #2809 — multi-container pod cleanup (solo)",
+      "fork": "https://github.com/AsifAd/kubernetes-plugin",
+      "docs": "jenkins/README.md",
+      "openPRs": 0
     },
     {
       "tech": "nifi",
@@ -180,6 +212,13 @@
     }
   ],
   "timeline": [
+    {
+      "date": "2026-05",
+      "title": "Jenkins kubernetes-plugin #2809",
+      "description": "Investigating — zombie multi-container agent pods after -noReconnectAfter; isolated Kind repro.",
+      "type": "planned",
+      "link": "https://github.com/jenkinsci/kubernetes-plugin/issues/2809"
+    },
     {
       "date": "2026-05",
       "title": "AppSet Refresh #27932",

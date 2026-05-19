@@ -11,7 +11,7 @@ Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd).
 | Issue | PR | Status | Notes |
 |-------|-----|--------|-------|
 | [#27928](https://github.com/argoproj/argo-cd/issues/27928) | [#27931](https://github.com/argoproj/argo-cd/pull/27931) | **PR Open** | AppSet UI namespaced namespace → [work/27928.md](work/27928.md) |
-| [#27798](https://github.com/argoproj/argo-cd/issues/27798) | [#27932](https://github.com/argoproj/argo-cd/pull/27932) | **PR Open** | AppSet Refresh button (API + UI) → [work/27798.md](work/27798.md) |
+| [#27798](https://github.com/argoproj/argo-cd/issues/27798) | [#27932](https://github.com/argoproj/argo-cd/pull/27932) | **PR Open** | AppSet Refresh — CI green → [work/27798.md](work/27798.md) |
 
 ---
 
