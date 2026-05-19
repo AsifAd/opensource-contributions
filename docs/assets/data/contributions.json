@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "name": "Asif Draxi",
+    "github": "AsifAd",
+    "portfolio": "https://asifad.github.io",
+    "portfolioLabel": "Portfolio",
+    "tagline": "Open Source Contributions Hub",
+    "description": "Tracking OSS work across Ansible, Argo CD, NiFi, Vault, Kubernetes, Docker, and Terraform.",
+    "updated": "2026-05-19"
+  },
+  "stats": {
+    "activeProjects": 1,
+    "openPRs": 2,
+    "plannedStacks": 6,
+    "unitTests": 163
+  },
+  "contributions": [
+    {
+      "id": "ini-file-11919",
+      "tech": "ansible",
+      "techLabel": "Ansible",
+      "module": "ini_file",
+      "title": "Fix comment-line deletion in ini_file",
+      "issue": 11919,
+      "pr": 12083,
+      "branch": "fix/ini-file-comment-deletion-11919",
+      "status": "open",
+      "statusLabel": "PR Open",
+      "repo": "ansible-collections/community.general",
+      "fork": "AsifAd/community.general",
+      "summary": "Pure documentation comments containing the option name were incorrectly deleted when state=present with exclusive=True.",
+      "highlights": ["Regression tests added", "Changelog fragment", "First upstream contribution"],
+      "deepDive": "ansible/work/ini-file-11919.md",
+      "links": {
+        "issue": "https://github.com/ansible-collections/community.general/issues/11919",
+        "pr": "https://github.com/ansible-collections/community.general/pull/12083"
+      }
+    },
+    {
+      "id": "nmcli-11588",
+      "tech": "ansible",
+      "techLabel": "Ansible",
+      "module": "nmcli",
+      "title": "Bond ARP check/diff idempotency fix",
+      "issue": 11588,
+      "pr": 12085,
+      "branch": "fix/nmcli-bond-arp-diff-11588",
+      "status": "open",
+      "statusLabel": "PR Open",
+      "repo": "ansible-collections/community.general",
+      "fork": "AsifAd/community.general",
+      "summary": "Bond connections with arp_interval and arp_ip_target reported changed on every run due to key name mismatch between show and compare paths.",
+      "highlights": ["163 unit tests passing", "Check mode fixed", "Bond MTU false positive resolved"],
+      "deepDive": "ansible/work/nmcli-11588.md",
+      "links": {
+        "issue": "https://github.com/ansible-collections/community.general/issues/11588",
+        "pr": "https://github.com/ansible-collections/community.general/pull/12085"
+      }
+    }
+  ],
+  "roadmap": [
+    {
+      "tech": "ansible",
+      "label": "Ansible",
+      "status": "active",
+      "icon": "⚡",
+      "color": "#EE0000",
+      "nextUp": "Keycloak #11747 — email_verified idempotency + check mode",
+      "fork": "https://github.com/AsifAd/community.general",
+      "docs": "ansible/README.md",
+      "openPRs": 2
+    },
+    {
+      "tech": "argocd",
+      "label": "Argo CD",
+      "status": "planned",
+      "icon": "🔄",
+      "color": "#EF7B4D",
+      "nextUp": "CLI unit test #21895 — argocd admin export/import",
+      "fork": "https://github.com/AsifAd/argo-cd",
+      "docs": "argocd/README.md",
+      "openPRs": 0
+    },
+    {
+      "tech": "nifi",
+      "label": "Apache NiFi",
+      "status": "planned",
+      "icon": "🌊",
+      "color": "#728E9E",
+      "nextUp": "Provenance repo corruption after OOM on NiFi 1.27.0",
+      "fork": "https://github.com/apache/nifi",
+      "docs": "nifi/README.md",
+      "openPRs": 0
+    },
+    {
+      "tech": "vault",
+      "label": "Vault / OpenBao",
+      "status": "planned",
+      "icon": "🔐",
+      "color": "#FFD814",
+      "nextUp": "community.hashi_vault #476 docs or OpenBao good-first issue",
+      "fork": null,
+      "docs": "vault/README.md",
+      "openPRs": 0
+    },
+    {
+      "tech": "kubernetes",
+      "label": "Kubernetes",
+      "status": "placeholder",
+      "icon": "☸️",
+      "color": "#326CE5",
+      "nextUp": "kubernetes/website docs PR or kubernetes.core #1042",
+      "fork": null,
+      "docs": "kubernetes/README.md",
+      "openPRs": 0
+    },
+    {
+      "tech": "docker",
+      "label": "Docker",
+      "status": "placeholder",
+      "icon": "🐳",
+      "color": "#2496ED",
+      "nextUp": "community.docker #790 — check-mode permanent diff",
+      "fork": "https://github.com/AsifAd/community.docker",
+      "docs": "docker/README.md",
+      "openPRs": 0
+    },
+    {
+      "tech": "terraform",
+      "label": "Terraform",
+      "status": "placeholder",
+      "icon": "🏗️",
+      "color": "#7B42BC",
+      "nextUp": "Provider aligned with production use (TBD)",
+      "fork": null,
+      "docs": "terraform/README.md",
+      "openPRs": 0
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2026-05",
+      "title": "nmcli bond ARP fix",
+      "description": "Opened PR #12085 with 163 unit tests — check mode and diff idempotency for bond ARP options.",
+      "type": "pr",
+      "link": "https://github.com/ansible-collections/community.general/pull/12085"
+    },
+    {
+      "date": "2026-05",
+      "title": "ini_file comment deletion fix",
+      "description": "First upstream contribution — PR #12083 fixing doc comment deletion in ini_file module.",
+      "type": "pr",
+      "link": "https://github.com/ansible-collections/community.general/pull/12083"
+    },
+    {
+      "date": "2026-05",
+      "title": "OSS hub launched",
+      "description": "Structured contribution tracking across 7 technology stacks with isolated dev environments.",
+      "type": "milestone",
+      "link": null
+    },
+    {
+      "date": "Next",
+      "title": "Keycloak identity fixes",
+      "description": "Target #11747 + #11886 — email_verified idempotency and federated_identities API shape.",
+      "type": "planned",
+      "link": "https://github.com/ansible-collections/community.general/issues/11747"
+    }
+  ]
+}

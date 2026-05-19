@@ -1,0 +1,27 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Env / secrets
+.env
+.env.*
+*.pem
+
+# Python (ansible venv references)
+.venv/
+__pycache__/
+*.pyc
+
+# Node (if added later)
+node_modules/
+dist/
+
+# Local dev
+*.local
