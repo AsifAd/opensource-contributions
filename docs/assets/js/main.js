@@ -120,7 +120,7 @@ function renderRoadmap(roadmap) {
   if (!grid) return;
 
   grid.innerHTML = roadmap.map((r, i) => `
-    <article class="roadmap-card reveal" data-testid="roadmap-${r.tech}" data-delay="${i * 60}" data-status="${r.status}">
+    <article id="roadmap-${r.tech}" class="roadmap-card reveal" data-testid="roadmap-${r.tech}" data-delay="${i * 60}" data-status="${r.status}">
       <div class="roadmap-card-header">
         <span class="roadmap-icon" aria-hidden="true">${r.icon}</span>
         <span class="roadmap-label">${r.label}</span>
