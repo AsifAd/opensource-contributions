@@ -10,7 +10,7 @@
   },
   "stats": {
     "activeProjects": 3,
-    "openPRs": 4,
+    "openPRs": 5,
     "plannedStacks": 8,
     "unitTests": 163
   },
@@ -106,18 +106,18 @@
       "module": "kubernetes-plugin",
       "title": "Fix zombie pods when jnlp exits with sidecars",
       "issue": 2809,
-      "pr": null,
+      "pr": 2835,
       "branch": "fix/no-reconnect-after-multi-container-2809",
-      "status": "in-progress",
-      "statusLabel": "In progress",
+      "status": "open",
+      "statusLabel": "PR Open",
       "repo": "jenkinsci/kubernetes-plugin",
       "fork": "AsifAd/kubernetes-plugin",
       "summary": "-noReconnectAfter stops jnlp after build, but multi-container pods (docker/sidecars) stay Running — cluster resource leak. Solo fix on isolated Kind + Helm.",
-      "highlights": ["Fix in KubernetesSlave._terminate", "PodUtils agent-exit detection", "mvn verify + Kind repro pending"],
+      "highlights": ["PR #2835 open", "mvn verify + Kind repro pass", "Multi-container + orphan pod delete"],
       "deepDive": "jenkins/work/2809.md",
       "links": {
         "issue": "https://github.com/jenkinsci/kubernetes-plugin/issues/2809",
-        "pr": null
+        "pr": "https://github.com/jenkinsci/kubernetes-plugin/pull/2835"
       }
     }
   ],
@@ -150,10 +150,10 @@
       "status": "active",
       "icon": "🔧",
       "color": "#D33833",
-      "nextUp": "kubernetes-plugin #2809 — multi-container pod cleanup (solo)",
+      "nextUp": "Await review — kubernetes-plugin #2835",
       "fork": "https://github.com/AsifAd/kubernetes-plugin",
       "docs": "jenkins/README.md",
-      "openPRs": 0
+      "openPRs": 1
     },
     {
       "tech": "nifi",
@@ -212,6 +212,13 @@
     }
   ],
   "timeline": [
+    {
+      "date": "2026-05",
+      "title": "Jenkins kubernetes-plugin #2835",
+      "description": "Opened PR — delete multi-container agent pods when jnlp exits with sidecars (fixes #2809).",
+      "type": "pr",
+      "link": "https://github.com/jenkinsci/kubernetes-plugin/pull/2835"
+    },
     {
       "date": "2026-05",
       "title": "Jenkins kubernetes-plugin #2809",

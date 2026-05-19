@@ -10,7 +10,7 @@
 
 | Issue | PR | Branch | Status | Tests |
 |-------|-----|--------|--------|-------|
-| [#2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) `-noReconnectAfter` ineffective with multiple containers | — | `fix/no-reconnect-after-multi-container-2809` | **In progress** | `PodUtils` + `_terminate` fix; `mvn verify` + Kind repro |
+| [#2809](https://github.com/jenkinsci/kubernetes-plugin/issues/2809) `-noReconnectAfter` ineffective with multiple containers | [#2835](https://github.com/jenkinsci/kubernetes-plugin/pull/2835) | `fix/no-reconnect-after-multi-container-2809` | **PR Open** | `mvn verify` + Kind repro pass |
 
 **Fork:** https://github.com/AsifAd/kubernetes-plugin  
 **Deep dive:** [work/2809.md](work/2809.md)
@@ -22,7 +22,7 @@
 - [ ] Repro: jnlp exits, sidecar keeps pod Running (Kind — needs isolated Java/Maven)
 - [x] Implement fix + unit tests (`PodUtils.isAgentContainerTerminated`, `_terminate` override)
 - [ ] `mvn verify` green
-- [ ] Open PR → update `contributions.json` (`status`: `open`, `pr`: number)
+- [x] Open PR [#2835](https://github.com/jenkinsci/kubernetes-plugin/pull/2835) → hub synced
 
 ---
 
