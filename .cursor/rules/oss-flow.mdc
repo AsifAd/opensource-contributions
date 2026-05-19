@@ -1,0 +1,20 @@
+---
+description: OSS contribution flow — invoke with /oss-flow to sync docs + live site
+alwaysApply: true
+---
+
+# /oss-flow — Open Source Hub Workflow
+
+**Trigger:** Run ONLY when the user message is exactly `/oss-flow` or starts with `/oss-flow`. Otherwise ignore this rule.
+
+This repo IS the hub. Site data: `docs/assets/data/contributions.json` · Playbook: `WORKFLOW.md`
+
+**On trigger:** Read JSON + active tech docs → print status summary → run subcommand or ask stage (`start` | `progress` | `pr-open` | `merged` | `sync` | `status`).
+
+**Subcommands:** `start <issue>` (investigating), `progress` (in-progress), `pr-open`, `merged`, `sync` (reconcile drift).
+
+**Same commit:** `<tech>/backlog.md`, `<tech>/README.md`, `work/<issue>.md`, `contributions.json`, root `README.md`.
+
+**Finish:** `npm run test:e2e` if json/site changed → commit → push `main` → live ~20s.
+
+Full steps: `WORKFLOW.md`

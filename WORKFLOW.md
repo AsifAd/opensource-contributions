@@ -221,6 +221,8 @@ After push, check:
 
 Your [portfolio](https://asifad.github.io) links here — keeping this repo current is keeping your public OSS story current.
 
+**Cursor:** type `/oss-flow` in chat to run the live-sync workflow (see `.cursor/rules/oss-flow.mdc`).
+
 ---
 
 ## Related
