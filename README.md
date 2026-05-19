@@ -56,13 +56,23 @@ Every technology folder follows the same shape:
 
 The [`docs/`](docs/) folder powers the GitHub Pages dashboard:
 
-- Animated hero with particle network background
+- Warm editorial UI with dark/light theme toggle
 - Live contribution cards with PR/issue links
 - Filterable technology roadmap
 - Contribution timeline
 - Links to [portfolio](https://asifad.github.io) and GitHub
 
 **Update site data:** edit [`docs/assets/data/contributions.json`](docs/assets/data/contributions.json)
+
+### E2E tests
+
+```bash
+npm ci
+npx playwright install chromium
+npm run test:e2e
+```
+
+Playwright serves `docs/` locally and runs full browser tests (navigation, theme, contributions, roadmap, timeline, stats, mobile, SEO, data integrity). CI runs on every push to `main`.
 
 ---
 

@@ -63,7 +63,7 @@ function renderContributions(contributions) {
   if (!grid) return;
 
   grid.innerHTML = contributions.map((c, i) => `
-    <article class="contrib-card reveal" data-delay="${i * 80}">
+    <article class="contrib-card reveal" data-testid="contrib-${c.id}" data-delay="${i * 80}">
       <div class="contrib-header">
         <span class="contrib-tech">${c.techLabel} · ${c.repo.split('/').pop()}</span>
         <span class="contrib-status ${c.status}">${c.statusLabel}</span>
@@ -91,7 +91,7 @@ function renderRoadmap(roadmap) {
   if (!grid) return;
 
   grid.innerHTML = roadmap.map((r, i) => `
-    <article class="roadmap-card reveal" data-delay="${i * 60}" data-status="${r.status}">
+    <article class="roadmap-card reveal" data-testid="roadmap-${r.tech}" data-delay="${i * 60}" data-status="${r.status}">
       <div class="roadmap-card-header">
         <span class="roadmap-icon" aria-hidden="true">${r.icon}</span>
         <span class="roadmap-label">${r.label}</span>
@@ -136,7 +136,7 @@ function renderTimeline(timeline) {
   if (!list) return;
 
   list.innerHTML = timeline.map(item => `
-    <div class="timeline-item type-${item.type}">
+    <div class="timeline-item type-${item.type}" data-testid="timeline-${item.type}-${item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}">
       <div class="timeline-date">${item.date}</div>
       <h3 class="timeline-title">${item.title}</h3>
       <p class="timeline-desc">${item.description}</p>

@@ -19,9 +19,13 @@ Thumbs.db
 __pycache__/
 *.pyc
 
-# Node (if added later)
+# Node
 node_modules/
 dist/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
 
 # Local dev
 *.local
