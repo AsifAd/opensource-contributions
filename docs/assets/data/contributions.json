@@ -9,9 +9,9 @@
     "updated": "2026-05-19"
   },
   "stats": {
-    "activeProjects": 1,
+    "activeProjects": 2,
     "openPRs": 2,
-    "plannedStacks": 6,
+    "plannedStacks": 5,
     "unitTests": 163
   },
   "contributions": [
@@ -56,6 +56,27 @@
         "issue": "https://github.com/ansible-collections/community.general/issues/11588",
         "pr": "https://github.com/ansible-collections/community.general/pull/12085"
       }
+    },
+    {
+      "id": "appset-ui-27928",
+      "tech": "argocd",
+      "techLabel": "Argo CD",
+      "module": "ui/appset",
+      "title": "AppSet UI broken outside default namespace",
+      "issue": 27928,
+      "pr": null,
+      "branch": "fix/appset-ui-namespaced-27928",
+      "status": "investigating",
+      "statusLabel": "Investigating",
+      "repo": "argoproj/argo-cd",
+      "fork": "AsifAd/argo-cd",
+      "summary": "ApplicationSet detail view fails when the AppSet is not in the argocd namespace but the control plane manages that namespace via application.namespaces.",
+      "highlights": ["Repro on public demo", "component:ui/appset", "Namespaced GitOps"],
+      "deepDive": "argocd/work/27928.md",
+      "links": {
+        "issue": "https://github.com/argoproj/argo-cd/issues/27928",
+        "pr": null
+      }
     }
   ],
   "roadmap": [
@@ -73,10 +94,10 @@
     {
       "tech": "argocd",
       "label": "Argo CD",
-      "status": "planned",
+      "status": "active",
       "icon": "🔄",
       "color": "#EF7B4D",
-      "nextUp": "CLI unit test #21895 — argocd admin export/import",
+      "nextUp": "#27928 — AppSet UI namespaced namespace fix",
       "fork": "https://github.com/AsifAd/argo-cd",
       "docs": "argocd/README.md",
       "openPRs": 0
@@ -138,6 +159,13 @@
     }
   ],
   "timeline": [
+    {
+      "date": "2026-05",
+      "title": "Argo CD AppSet UI #27928",
+      "description": "Started investigating namespaced ApplicationSet detail view failure (application.namespaces).",
+      "type": "planned",
+      "link": "https://github.com/argoproj/argo-cd/issues/27928"
+    },
     {
       "date": "2026-05",
       "title": "nmcli bond ARP fix",

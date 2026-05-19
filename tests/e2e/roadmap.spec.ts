@@ -35,6 +35,7 @@ test.describe("roadmap", () => {
     await page.getByTestId("filter-bar").getByRole("tab", { name: "Active" }).click();
     await expect(page.locator(".roadmap-card:not(.hidden-filter)")).toHaveCount(activeCount);
     await expect(page.getByTestId("roadmap-ansible")).toBeVisible();
+    await expect(page.getByTestId("roadmap-argocd")).toBeVisible();
   });
 
   test("filter: Planned hides active and placeholder stacks", async ({ page }) => {
@@ -45,7 +46,8 @@ test.describe("roadmap", () => {
 
     await page.getByTestId("filter-bar").getByRole("tab", { name: "Planned" }).click();
     await expect(page.locator(".roadmap-card:not(.hidden-filter)")).toHaveCount(plannedCount);
-    await expect(page.getByTestId("roadmap-argocd")).toBeVisible();
+    await expect(page.getByTestId("roadmap-nifi")).toBeVisible();
+    await expect(page.getByTestId("roadmap-argocd")).toBeHidden();
     await expect(page.getByTestId("roadmap-ansible")).toBeHidden();
   });
 

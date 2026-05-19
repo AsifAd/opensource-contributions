@@ -46,15 +46,16 @@ test.describe("timeline", () => {
     await expect(milestone.getByRole("link")).toHaveCount(0);
   });
 
-  test("planned entry links to Keycloak issue", async ({ page }) => {
+  test("planned entries link to their upstream issues", async ({ page }) => {
+    const data = loadContributionsData();
     await waitForAppReady(page);
     await page.getByTestId("section-timeline").scrollIntoViewIfNeeded();
 
-    const planned = page.locator(".timeline-item.type-planned");
-    await expect(planned.getByRole("link", { name: "View" })).toHaveAttribute(
-      "href",
-      "https://github.com/ansible-collections/community.general/issues/11747",
-    );
+    for (const item of data.timeline.filter((t) => t.type === "planned" && t.link)) {
+      const slug = item.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+      const entry = page.getByTestId(`timeline-planned-${slug}`);
+      await expect(entry.getByRole("link", { name: "View" })).toHaveAttribute("href", item.link);
+    }
   });
 
   test("timeline dates are shown for each entry", async ({ page }) => {

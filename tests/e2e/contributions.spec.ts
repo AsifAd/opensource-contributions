@@ -27,9 +27,13 @@ test.describe("contributions", () => {
     for (const c of data.contributions) {
       const card = page.getByTestId(`contrib-${c.id}`);
 
-      const prLink = card.getByRole("link", { name: `PR #${c.pr}` });
-      await expect(prLink).toHaveAttribute("href", c.links.pr);
-      await expect(prLink).toHaveAttribute("target", "_blank");
+      if (c.pr && c.links.pr) {
+        const prLink = card.getByRole("link", { name: `PR #${c.pr}` });
+        await expect(prLink).toHaveAttribute("href", c.links.pr);
+        await expect(prLink).toHaveAttribute("target", "_blank");
+      } else {
+        await expect(card.getByRole("link", { name: /^PR #/ })).toHaveCount(0);
+      }
 
       const issueLink = card.getByRole("link", { name: `Issue #${c.issue}` });
       await expect(issueLink).toHaveAttribute("href", c.links.issue);

@@ -39,10 +39,29 @@ async function init() {
     renderContributions(data.contributions);
     renderRoadmap(data.roadmap);
     renderTimeline(data.timeline);
+    updateStats(data.stats, data.roadmap);
     updateMeta(data.meta, data.stats, data.contributions, data.roadmap);
   } catch (err) {
     console.error('Failed to load contributions data:', err);
   }
+}
+
+function updateStats(stats, roadmap = []) {
+  const cards = document.querySelectorAll('.stat-card .stat-value[data-count]');
+  if (!cards.length) return;
+
+  const values = [
+    stats.activeProjects ?? roadmap.filter((r) => r.status === 'active').length,
+    stats.openPRs ?? 0,
+    roadmap.length,
+    stats.unitTests ?? 0,
+  ];
+
+  cards.forEach((el, i) => {
+    if (values[i] !== undefined) {
+      el.dataset.count = String(values[i]);
+    }
+  });
 }
 
 function updateMeta(meta, stats, contributions = [], roadmap = []) {
@@ -277,9 +296,8 @@ function initSectionHighlight() {
 // ── Boot ────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
-  init();
+  init().then(() => animateCounters());
   initNav();
   initSectionHighlight();
-  animateCounters();
   observeReveals(document.querySelectorAll('.hero .reveal, .stats-section .reveal, .section-header.reveal, .filter-bar.reveal, .cta-card.reveal'));
 });
