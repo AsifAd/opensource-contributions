@@ -1,18 +1,37 @@
 /**
- * OSS Contributions Hub — Main Application
+ * OSS Tracker — application logic
  */
 
 const REPO_BASE = 'https://github.com/AsifAd/opensource-contributions/blob/main/';
 
+// ── Theme ───────────────────────────────────────────────────────────────────
+function initTheme() {
+  const root = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  if (!toggle) return;
+
+  function apply(theme) {
+    root.setAttribute('data-theme', theme);
+    localStorage.setItem('oss-theme', theme);
+    toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.content = getComputedStyle(root).getPropertyValue('--meta-theme').trim() || '#15130f';
+    }
+  }
+
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    apply(next);
+  });
+}
+
 // ── Loader ──────────────────────────────────────────────────────────────────
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.querySelector('.page-loader')?.classList.add('hidden');
-    document.body.classList.add('loaded');
-  }, 600);
+  setTimeout(() => document.querySelector('.page-loader')?.classList.add('hidden'), 400);
 });
 
-// ── Data fetch & render ─────────────────────────────────────────────────────
+// ── Data ────────────────────────────────────────────────────────────────────
 async function init() {
   try {
     const res = await fetch('assets/data/contributions.json');
@@ -44,7 +63,7 @@ function renderContributions(contributions) {
   if (!grid) return;
 
   grid.innerHTML = contributions.map((c, i) => `
-    <article class="contrib-card reveal" data-delay="${i * 100}" style="--card-accent: linear-gradient(135deg, #EE0000, #ff4444)">
+    <article class="contrib-card reveal" data-delay="${i * 80}">
       <div class="contrib-header">
         <span class="contrib-tech">${c.techLabel} · ${c.repo.split('/').pop()}</span>
         <span class="contrib-status ${c.status}">${c.statusLabel}</span>
@@ -56,18 +75,9 @@ function renderContributions(contributions) {
         ${c.highlights.map(h => `<span class="contrib-tag">${h}</span>`).join('')}
       </div>
       <div class="contrib-links">
-        <a href="${c.links.pr}" target="_blank" rel="noopener" class="contrib-link">
-          PR #${c.pr}
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-        </a>
-        <a href="${c.links.issue}" target="_blank" rel="noopener" class="contrib-link">
-          Issue #${c.issue}
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-        </a>
-        <a href="${REPO_BASE}${c.deepDive}" target="_blank" rel="noopener" class="contrib-link">
-          Deep dive
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-        </a>
+        <a href="${c.links.pr}" target="_blank" rel="noopener" class="contrib-link">PR #${c.pr}</a>
+        <a href="${c.links.issue}" target="_blank" rel="noopener" class="contrib-link">Issue #${c.issue}</a>
+        <a href="${REPO_BASE}${c.deepDive}" target="_blank" rel="noopener" class="contrib-link">Deep dive</a>
       </div>
     </article>
   `).join('');
@@ -81,18 +91,17 @@ function renderRoadmap(roadmap) {
   if (!grid) return;
 
   grid.innerHTML = roadmap.map((r, i) => `
-    <article class="roadmap-card reveal" data-delay="${i * 80}" data-status="${r.status}" style="--card-color: ${r.color}">
+    <article class="roadmap-card reveal" data-delay="${i * 60}" data-status="${r.status}">
       <div class="roadmap-card-header">
-        <span class="roadmap-icon">${r.icon}</span>
+        <span class="roadmap-icon" aria-hidden="true">${r.icon}</span>
         <span class="roadmap-label">${r.label}</span>
         <span class="roadmap-status ${r.status}">${r.status}</span>
       </div>
-      <p class="roadmap-next"><strong>Next:</strong> ${r.nextUp}</p>
+      <p class="roadmap-next"><strong>Next</strong> ${r.nextUp}</p>
       <div class="roadmap-meta">
         <span class="roadmap-prs">${r.openPRs} open PR${r.openPRs !== 1 ? 's' : ''}</span>
-        <a href="${REPO_BASE}${r.docs}" target="_blank" rel="noopener" class="roadmap-docs-link">Docs →</a>
+        <a href="${REPO_BASE}${r.docs}" target="_blank" rel="noopener" class="roadmap-docs-link">Docs</a>
       </div>
-      <div class="roadmap-accent-bar"></div>
     </article>
   `).join('');
 
@@ -106,19 +115,16 @@ function initFilters() {
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
+      buttons.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
       btn.classList.add('active');
-      const filter = btn.dataset.filter;
+      btn.setAttribute('aria-selected', 'true');
 
+      const filter = btn.dataset.filter;
       cards.forEach(card => {
-        if (filter === 'all' || card.dataset.status === filter) {
-          card.classList.remove('hidden-filter');
-          card.style.animation = 'none';
-          card.offsetHeight; // reflow
-          card.style.animation = '';
-        } else {
-          card.classList.add('hidden-filter');
-        }
+        card.classList.toggle('hidden-filter', filter !== 'all' && card.dataset.status !== filter);
       });
     });
   });
@@ -134,7 +140,7 @@ function renderTimeline(timeline) {
       <div class="timeline-date">${item.date}</div>
       <h3 class="timeline-title">${item.title}</h3>
       <p class="timeline-desc">${item.description}</p>
-      ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="timeline-link">View →</a>` : ''}
+      ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="timeline-link">View</a>` : ''}
     </div>
   `).join('');
 
@@ -143,7 +149,10 @@ function renderTimeline(timeline) {
 
 // ── Scroll reveals ──────────────────────────────────────────────────────────
 function observeReveals(elements) {
-  const allReveals = document.querySelectorAll('.reveal:not(.visible)');
+  const pending = elements.length
+    ? elements
+    : document.querySelectorAll('.reveal:not(.visible)');
+
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
@@ -154,10 +163,10 @@ function observeReveals(elements) {
         }
       });
     },
-    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.12, rootMargin: '0px 0px -32px 0px' }
   );
 
-  allReveals.forEach(el => observer.observe(el));
+  pending.forEach(el => observer.observe(el));
 }
 
 function observeTimeline(items) {
@@ -165,12 +174,12 @@ function observeTimeline(items) {
     entries => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 120);
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
           observer.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.2 }
+    { threshold: 0.15 }
   );
 
   items.forEach(el => observer.observe(el));
@@ -186,12 +195,12 @@ function animateCounters() {
           const el = entry.target;
           const target = parseInt(el.dataset.count, 10);
           const suffix = el.dataset.suffix || '';
-          const duration = 1800;
+          const duration = 1200;
           const start = performance.now();
 
           function tick(now) {
             const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 4);
+            const eased = 1 - Math.pow(1 - progress, 3);
             el.textContent = Math.floor(eased * target) + suffix;
             if (progress < 1) requestAnimationFrame(tick);
           }
@@ -201,7 +210,7 @@ function animateCounters() {
         }
       });
     },
-    { threshold: 0.5 }
+    { threshold: 0.4 }
   );
 
   counters.forEach(c => observer.observe(c));
@@ -209,13 +218,8 @@ function animateCounters() {
 
 // ── Navigation ──────────────────────────────────────────────────────────────
 function initNav() {
-  const nav = document.getElementById('nav');
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
-
-  window.addEventListener('scroll', () => {
-    nav?.classList.toggle('scrolled', window.scrollY > 50);
-  }, { passive: true });
 
   toggle?.addEventListener('click', () => {
     const open = toggle.classList.toggle('open');
@@ -223,134 +227,49 @@ function initNav() {
     toggle.setAttribute('aria-expanded', open);
   });
 
-  links?.querySelectorAll('a:not([target])').forEach(a => {
+  links?.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       toggle?.classList.remove('open');
       links?.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
     });
   });
 }
 
-// ── Cursor glow ─────────────────────────────────────────────────────────────
-function initCursorGlow() {
-  const glow = document.querySelector('.cursor-glow');
-  if (!glow || window.matchMedia('(pointer: coarse)').matches) return;
+// ── Active section highlight ────────────────────────────────────────────────
+function initSectionHighlight() {
+  const navLinks = document.querySelectorAll('.nav-links a, .quick-nav a');
+  const sections = ['contributions', 'roadmap', 'timeline']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
 
-  let x = 0, y = 0;
-  let cx = 0, cy = 0;
+  if (!sections.length) return;
 
-  document.addEventListener('mousemove', e => {
-    x = e.clientX;
-    y = e.clientY;
-  }, { passive: true });
-
-  function animate() {
-    cx += (x - cx) * 0.08;
-    cy += (y - cy) * 0.08;
-    glow.style.left = cx + 'px';
-    glow.style.top = cy + 'px';
-    requestAnimationFrame(animate);
-  }
-  animate();
-}
-
-// ── Particle canvas ─────────────────────────────────────────────────────────
-function initParticles() {
-  const canvas = document.getElementById('particles');
-  if (!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let w, h;
-
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  }
-
-  function createParticles() {
-    const count = Math.min(Math.floor(w * h / 15000), 80);
-    particles = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 1.5 + 0.5,
-      opacity: Math.random() * 0.4 + 0.1,
-    }));
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, w, h);
-
-    particles.forEach((p, i) => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0) p.x = w;
-      if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h;
-      if (p.y > h) p.y = 0;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(56, 189, 248, ${p.opacity})`;
-      ctx.fill();
-
-      for (let j = i + 1; j < particles.length; j++) {
-        const p2 = particles[j];
-        const dx = p.x - p2.x;
-        const dy = p.y - p2.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(56, 189, 248, ${0.06 * (1 - dist / 120)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(a => {
+            const match = a.getAttribute('href') === `#${id}`;
+            a.style.color = match ? 'var(--text)' : '';
+            a.style.background = match ? 'var(--accent-soft)' : '';
+          });
         }
-      }
-    });
+      });
+    },
+    { threshold: 0.35, rootMargin: '-20% 0px -55% 0px' }
+  );
 
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  createParticles();
-  draw();
-
-  window.addEventListener('resize', () => {
-    resize();
-    createParticles();
-  }, { passive: true });
-}
-
-// ── Magnetic buttons ────────────────────────────────────────────────────────
-function initMagneticButtons() {
-  if (window.matchMedia('(pointer: coarse)').matches) return;
-
-  document.querySelectorAll('.btn-primary').forEach(el => {
-    el.addEventListener('mousemove', e => {
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      el.style.transform = `translate(${x * 0.03}px, ${y * 0.03}px)`;
-    });
-    el.addEventListener('mouseleave', () => {
-      el.style.transform = '';
-    });
-  });
+  sections.forEach(s => observer.observe(s));
 }
 
 // ── Boot ────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   init();
   initNav();
-  initCursorGlow();
-  initParticles();
+  initSectionHighlight();
   animateCounters();
   observeReveals(document.querySelectorAll('.hero .reveal, .stats-section .reveal, .section-header.reveal, .filter-bar.reveal, .cta-card.reveal'));
-
-  // Delay magnetic for cards rendered async
-  setTimeout(initMagneticButtons, 1000);
 });
