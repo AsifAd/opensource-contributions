@@ -77,6 +77,27 @@
         "issue": "https://github.com/argoproj/argo-cd/issues/27928",
         "pr": "https://github.com/argoproj/argo-cd/pull/27931"
       }
+    },
+    {
+      "id": "appset-refresh-27798",
+      "tech": "argocd",
+      "techLabel": "Argo CD",
+      "module": "ui/appset",
+      "title": "ApplicationSet Refresh button",
+      "issue": 27798,
+      "pr": null,
+      "branch": "feat/appset-refresh-ui-27798",
+      "status": "investigating",
+      "statusLabel": "Investigating",
+      "repo": "argoproj/argo-cd",
+      "fork": "AsifAd/argo-cd",
+      "summary": "Expose ApplicationSet refresh via API + UI — patch argocd.argoproj.io/application-set-refresh annotation instead of kubectl workaround.",
+      "highlights": ["Controller logic exists", "API + UI gap", "Git generator cache bypass"],
+      "deepDive": "argocd/work/27798.md",
+      "links": {
+        "issue": "https://github.com/argoproj/argo-cd/issues/27798",
+        "pr": null
+      }
     }
   ],
   "roadmap": [
@@ -97,7 +118,7 @@
       "status": "active",
       "icon": "🔄",
       "color": "#EF7B4D",
-      "nextUp": "#27928 — AppSet UI namespaced namespace fix",
+      "nextUp": "#27798 — AppSet Refresh button (API + UI)",
       "fork": "https://github.com/AsifAd/argo-cd",
       "docs": "argocd/README.md",
       "openPRs": 1
@@ -159,6 +180,13 @@
     }
   ],
   "timeline": [
+    {
+      "date": "2026-05",
+      "title": "AppSet Refresh #27798 — investigating",
+      "description": "Claimed issue — controller refresh annotation exists; planning Refresh RPC + UI button in isolated ~/oss/argo-cd.",
+      "type": "planned",
+      "link": "https://github.com/argoproj/argo-cd/issues/27798"
+    },
     {
       "date": "2026-05",
       "title": "Argo CD AppSet UI fix #27931",

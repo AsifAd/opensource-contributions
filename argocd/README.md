@@ -2,7 +2,7 @@
 
 Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd) (GitOps).
 
-**Status:** **Active** — investigating [#27928](https://github.com/argoproj/argo-cd/issues/27928)  
+**Status:** **Active** — [#27931](https://github.com/argoproj/argo-cd/pull/27931) open; investigating [#27798](https://github.com/argoproj/argo-cd/issues/27798)  
 **GitHub:** [AsifAd](https://github.com/AsifAd)  
 **Fork:** https://github.com/AsifAd/argo-cd  
 **Clone path:** `~/oss/argo-cd` (isolated from work dirs)
@@ -12,7 +12,8 @@ Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd) (GitOps
 | [setup.md](setup.md) | Fork, clone, Kind, isolated VM option |
 | [testing.md](testing.md) | Unit / local / e2e tiers + isolation recipes |
 | [backlog.md](backlog.md) | Planned & in-flight issues |
-| [work/27928.md](work/27928.md) | AppSet UI namespaced namespace — repro & plan |
+| [work/27928.md](work/27928.md) | AppSet UI namespaced namespace — PR #27931 |
+| [work/27798.md](work/27798.md) | AppSet Refresh button — investigating |
 
 **Related work notes:** [../../Issues/fileparser-argo-issue/](../../Issues/fileparser-argo-issue/) (internal infra; not upstream)
 
@@ -23,12 +24,13 @@ Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd) (GitOps
 | Issue | PR | Status |
 |-------|-----|--------|
 | [#27928](https://github.com/argoproj/argo-cd/issues/27928) | [#27931](https://github.com/argoproj/argo-cd/pull/27931) | **PR Open** — AppSet UI outside default namespace |
+| [#27798](https://github.com/argoproj/argo-cd/issues/27798) | — | **Investigating** — AppSet Refresh button (API + UI) |
 
 ---
 
 ## Next up (backlog)
 
-After #27928: [#21895](https://github.com/argoproj/argo-cd/issues/21895) (admin export/import tests), docs PR, [#21052](https://github.com/argoproj/argo-cd/issues/21052).
+After #27798: [#27878](https://github.com/argoproj/argo-cd/issues/27878) (AppSet health UI), [#21895](https://github.com/argoproj/argo-cd/issues/21895) (admin export/import tests).
 
 → [backlog.md](backlog.md)
 
