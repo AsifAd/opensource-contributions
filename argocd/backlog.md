@@ -2,7 +2,7 @@
 
 Contributions to [argoproj/argo-cd](https://github.com/argoproj/argo-cd).
 
-**Status:** **Active** — [#27928](https://github.com/argoproj/argo-cd/issues/27928) investigating.
+**Status:** **Active** — [#27931](https://github.com/argoproj/argo-cd/pull/27931) open (fixes #27928).
 
 ---
 

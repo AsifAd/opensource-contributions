@@ -6,7 +6,7 @@
     "portfolioLabel": "Portfolio",
     "tagline": "Open Source Contributions Hub",
     "description": "Tracking OSS work across Ansible, Argo CD, NiFi, Vault, Kubernetes, Docker, and Terraform.",
-    "updated": "2026-05-19"
+    "updated": "2026-05-20"
   },
   "stats": {
     "activeProjects": 2,
@@ -71,7 +71,7 @@
       "repo": "argoproj/argo-cd",
       "fork": "AsifAd/argo-cd",
       "summary": "Fixed UI sending appNamespace instead of appsetNamespace on ApplicationSet GET/watch/resource-tree — namespaced AppSet detail view failed to load.",
-      "highlights": ["PR #27931 open", "4 unit tests added", "Fixes namespaced AppSet UI"],
+      "highlights": ["PR #27931 open", "167 UI tests pass", "DCO signed"],
       "deepDive": "argocd/work/27928.md",
       "links": {
         "issue": "https://github.com/argoproj/argo-cd/issues/27928",
