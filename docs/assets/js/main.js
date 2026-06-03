@@ -67,6 +67,7 @@ async function init() {
     renderRoadmap(data.roadmap);
     updateStats(data.stats, data.roadmap);
     updateMeta(data.meta, data.stats, data.contributions, data.roadmap);
+    initCmdPalette(buildOssSearchIndex(data));
   } catch (err) {
     console.error('Failed to load contributions data:', err);
   }
@@ -304,7 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionHighlight();
   observeReveals(document.querySelectorAll('.hero .reveal, .stats-section .reveal, .section-header.reveal, .filter-bar.reveal, .cta-card.reveal'));
   initSpotlight();
-  initCmdPalette();
 });
 
 function initSpotlight() {
@@ -319,113 +319,261 @@ function initSpotlight() {
   });
 }
 
-function initCmdPalette() {
+function buildOssSearchIndex(data) {
+  const items = [];
+
+  const add = (entry) => {
+    const text = [entry.title, entry.subtitle, entry.group, ...(entry.keywords || [])]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
+    items.push({ ...entry, searchText: text });
+  };
+
+  add({
+    id: 'page-contributions',
+    title: 'Active contributions',
+    subtitle: 'In-flight upstream PRs',
+    group: 'Pages',
+    keywords: ['contributions', 'prs', 'open', 'merged'],
+    action: 'nav',
+    target: '#contributions',
+  });
+  add({
+    id: 'page-roadmap',
+    title: 'Technology roadmap',
+    subtitle: 'Stacks, status, and docs',
+    group: 'Pages',
+    keywords: ['roadmap', 'stacks', 'ansible', 'argocd', 'planned'],
+    action: 'nav',
+    target: '#roadmap',
+  });
+
+  (data.contributions || []).forEach((c) => {
+    add({
+      id: `contrib-${c.id}`,
+      title: c.title,
+      subtitle: `${c.statusLabel} · ${c.techLabel} · ${c.module}`,
+      group: 'Contributions',
+      keywords: [c.title, c.module, c.tech, c.techLabel, c.status, c.statusLabel, c.repo, c.summary, ...(c.highlights || [])],
+      action: 'nav',
+      target: '#contributions',
+    });
+    if (c.links?.pr) {
+      add({
+        id: `contrib-pr-${c.id}`,
+        title: `PR #${c.pr}`,
+        subtitle: c.title,
+        group: 'Pull requests',
+        keywords: [`pr ${c.pr}`, c.repo, c.module],
+        action: 'external',
+        url: c.links.pr,
+      });
+    }
+    if (c.links?.issue) {
+      add({
+        id: `contrib-issue-${c.id}`,
+        title: `Issue #${c.issue}`,
+        subtitle: c.title,
+        group: 'Issues',
+        keywords: [`issue ${c.issue}`, c.repo],
+        action: 'external',
+        url: c.links.issue,
+      });
+    }
+  });
+
+  (data.roadmap || []).forEach((r) => {
+    add({
+      id: `roadmap-${r.tech}`,
+      title: r.label,
+      subtitle: `${r.status} · ${r.nextUp}`,
+      group: 'Roadmap',
+      keywords: [r.tech, r.label, r.status, r.nextUp, 'roadmap'],
+      action: 'nav',
+      target: `#roadmap-${r.tech}`,
+    });
+  });
+
+  add({ id: 'action-theme', title: 'Toggle light / dark theme', group: 'Actions', keywords: ['theme', 'dark', 'light'], action: 'theme' });
+  add({ id: 'link-portfolio', title: 'Open portfolio', subtitle: data.meta?.portfolio, group: 'Links', keywords: ['portfolio', 'asif'], action: 'external', url: data.meta?.portfolio || 'https://asifad.github.io' });
+  add({ id: 'link-github', title: 'GitHub profile', group: 'Links', keywords: ['github', 'asifad'], action: 'external', url: `https://github.com/${data.meta?.github || 'AsifAd'}` });
+  add({ id: 'link-repo', title: 'View source repository', group: 'Links', keywords: ['source', 'repo'], action: 'external', url: 'https://github.com/AsifAd/opensource-contributions' });
+
+  return items;
+}
+
+function renderCmdResults(container, items, footerEl) {
+  const groups = new Map();
+  items.forEach((item) => {
+    const list = groups.get(item.group) || [];
+    list.push(item);
+    groups.set(item.group, list);
+  });
+
+  container.innerHTML = [...groups.entries()]
+    .map(
+      ([group, entries]) => `
+    <div class="cmd-group">
+        <div class="spotlight-group-label">${group}</div>
+      ${entries
+        .map(
+          (item) => `
+        <button type="button" class="cmd-item cmd-spotlight-item" role="option"
+          data-id="${item.id}"
+          data-action="${item.action}"
+          ${item.target ? `data-target="${item.target}"` : ''}
+          ${item.url ? `data-url="${item.url}"` : ''}
+          data-search-text="${item.searchText.replace(/"/g, '&quot;')}">
+          <span class="cmd-item-icon" aria-hidden="true">◈</span>
+          <span class="cmd-item-text">
+            <span class="cmd-item-title">${item.title}</span>
+            ${item.subtitle ? `<span class="cmd-item-sub">${item.subtitle}</span>` : ''}
+          </span>
+        </button>`,
+        )
+        .join('')}
+    </div>`,
+    )
+    .join('');
+
+  if (footerEl) {
+    footerEl.innerHTML = `
+      <span>${items.length} items</span>
+      <div class="spotlight-shortcuts">
+        <span class="spotlight-kbd">↑</span>
+        <span class="spotlight-kbd">↓</span>
+        <span>navigate</span>
+        <span class="spotlight-kbd">↵</span>
+        <span>open</span>
+        <span class="spotlight-kbd">esc</span>
+      </div>`;
+  }
+}
+
+function initCmdPalette(searchIndex) {
+  const root = document.getElementById('cmd-root');
   const backdrop = document.getElementById('cmd-backdrop');
   const palette = document.getElementById('cmd-palette');
   const input = document.getElementById('cmd-input');
-  const items = Array.from(document.querySelectorAll('.cmd-item'));
+  const results = document.getElementById('cmd-results');
+  const empty = document.getElementById('cmd-empty');
+  const footer = document.getElementById('cmd-footer');
+  let items = [];
   let selectedIndex = 0;
 
-  if (!palette) return;
+  if (!root || !palette || !results) return;
+
+  renderCmdResults(results, searchIndex, footer);
+
+  function getItemNodes() {
+    return Array.from(results.querySelectorAll('.cmd-spotlight-item'));
+  }
+
+  function runItem(item) {
+    const action = item.dataset.action;
+    if (action === 'nav') {
+      const target = document.querySelector(item.dataset.target);
+      if (target) {
+        const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10) || 64;
+        const top = target.getBoundingClientRect().top + window.scrollY - (navHeight + 24);
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    } else if (action === 'theme') {
+      document.getElementById('theme-toggle')?.click();
+    } else if (action === 'external' && item.dataset.url) {
+      window.open(item.dataset.url, '_blank', 'noopener,noreferrer');
+    }
+    toggle();
+  }
 
   function toggle() {
-    const isHidden = palette.classList.contains('hidden');
+    const isHidden = root.classList.contains('hidden');
     if (isHidden) {
-      backdrop.classList.remove('hidden');
-      palette.classList.remove('hidden');
+      root.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => root.classList.add('is-open'));
       input.focus();
       input.value = '';
       filterItems('');
     } else {
-      backdrop.classList.add('hidden');
-      palette.classList.add('hidden');
+      root.classList.remove('is-open');
+      root.classList.add('hidden');
+      document.body.style.overflow = '';
       input.blur();
     }
   }
 
   function filterItems(query) {
-    const q = query.toLowerCase();
+    const q = query.trim().toLowerCase();
+    items = getItemNodes();
     let visibleCount = 0;
-    items.forEach(item => {
-      const text = item.textContent.toLowerCase();
-      if (text.includes(q)) {
-        item.style.display = 'flex';
-        visibleCount++;
-      } else {
-        item.style.display = 'none';
-      }
+    items.forEach((item) => {
+      const match = !q || item.dataset.searchText.includes(q);
+      item.style.display = match ? 'flex' : 'none';
       item.classList.remove('selected');
+      if (match) visibleCount++;
     });
-    
-    const visibleItems = items.filter(i => i.style.display !== 'none');
+    empty?.classList.toggle('hidden', visibleCount > 0);
+    const visibleItems = items.filter((i) => i.style.display !== 'none');
     if (visibleItems.length > 0) {
       selectedIndex = 0;
       visibleItems[0].classList.add('selected');
     }
   }
 
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', (e) => {
     if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
       toggle();
     }
-    if (e.key === 'Escape' && !palette.classList.contains('hidden')) {
-      toggle();
-    }
-    
-    if (!palette.classList.contains('hidden')) {
-      const visibleItems = items.filter(i => i.style.display !== 'none');
+    if (e.key === 'Escape' && !root.classList.contains('hidden')) toggle();
+
+    if (!root.classList.contains('hidden')) {
+      items = getItemNodes().filter((i) => i.style.display !== 'none');
       if (e.key === 'ArrowDown') {
         e.preventDefault();
-        selectedIndex = (selectedIndex + 1) % visibleItems.length;
-        visibleItems.forEach(i => i.classList.remove('selected'));
-        if (visibleItems[selectedIndex]) {
-          visibleItems[selectedIndex].classList.add('selected');
-          visibleItems[selectedIndex].scrollIntoView({ block: 'nearest' });
-        }
+        selectedIndex = (selectedIndex + 1) % items.length;
+        items.forEach((i) => i.classList.remove('selected'));
+        items[selectedIndex]?.classList.add('selected');
+        items[selectedIndex]?.scrollIntoView({ block: 'nearest' });
       }
       if (e.key === 'ArrowUp') {
         e.preventDefault();
-        selectedIndex = (selectedIndex - 1 + visibleItems.length) % visibleItems.length;
-        visibleItems.forEach(i => i.classList.remove('selected'));
-        if (visibleItems[selectedIndex]) {
-          visibleItems[selectedIndex].classList.add('selected');
-          visibleItems[selectedIndex].scrollIntoView({ block: 'nearest' });
-        }
+        selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+        items.forEach((i) => i.classList.remove('selected'));
+        items[selectedIndex]?.classList.add('selected');
+        items[selectedIndex]?.scrollIntoView({ block: 'nearest' });
       }
       if (e.key === 'Enter') {
         e.preventDefault();
-        if (visibleItems[selectedIndex]) visibleItems[selectedIndex].click();
+        if (items[selectedIndex]) runItem(items[selectedIndex]);
       }
     }
   });
 
-  input.addEventListener('input', e => filterItems(e.target.value));
+  input.addEventListener('input', (e) => filterItems(e.target.value));
 
-  items.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      items.forEach(i => i.classList.remove('selected'));
-      item.classList.add('selected');
-      selectedIndex = items.filter(i => i.style.display !== 'none').indexOf(item);
-    });
-    
-    item.addEventListener('click', () => {
-      const action = item.dataset.action;
-      if (action === 'nav') {
-        const target = document.querySelector(item.dataset.target);
-        if (target) {
-          const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10) || 64;
-          const top = target.getBoundingClientRect().top + window.scrollY - (navHeight + 24);
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-      } else if (action === 'theme') {
-        document.getElementById('theme-toggle')?.click();
-      } else if (action === 'portfolio') {
-        window.open('https://asifad.github.io', '_blank');
-      }
-      toggle();
-    });
+  results.addEventListener('click', (e) => {
+    const item = e.target.closest('.cmd-spotlight-item');
+    if (item) runItem(item);
+  });
+
+  results.addEventListener('mouseover', (e) => {
+    const item = e.target.closest('.cmd-spotlight-item');
+    if (!item || item.style.display === 'none') return;
+    getItemNodes().forEach((i) => i.classList.remove('selected'));
+    item.classList.add('selected');
+    selectedIndex = items.filter((i) => i.style.display !== 'none').indexOf(item);
   });
 
   backdrop.addEventListener('click', toggle);
+
+  document.querySelectorAll('[data-cmd-open]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (root.classList.contains('hidden')) toggle();
+      else input.focus();
+    });
+  });
 }
