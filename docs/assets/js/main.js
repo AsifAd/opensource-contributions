@@ -86,6 +86,13 @@ function updateMeta(meta, stats, contributions = [], roadmap = []) {
   }
 }
 
+function getStatusIcon(status) {
+  if (status === 'merged') {
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-merge"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>`;
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-pull-request"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" x2="6" y1="9" y2="21"/></svg>`;
+}
+
 // ── Contributions ───────────────────────────────────────────────────────────
 function renderContributions(contributions) {
   const grid = document.getElementById('contributions-grid');
@@ -94,7 +101,10 @@ function renderContributions(contributions) {
   grid.innerHTML = contributions.map((c, i) => `
     <article class="contrib-card reveal" data-testid="contrib-${c.id}" data-delay="${i * 80}">
       <div class="contrib-header">
-        <span class="contrib-tech">${c.techLabel} · ${c.repo.split('/').pop()}</span>
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span class="contrib-icon status-${c.status}">${getStatusIcon(c.status)}</span>
+          <span class="contrib-tech">${c.techLabel} · ${c.repo.split('/').pop()}</span>
+        </div>
         <span class="contrib-status ${c.status}">${c.statusLabel}</span>
       </div>
       <h3 class="contrib-title">${c.title}</h3>

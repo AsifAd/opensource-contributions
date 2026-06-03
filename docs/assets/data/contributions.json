@@ -10,7 +10,7 @@
   },
   "stats": {
     "activeProjects": 3,
-    "openPRs": 5,
+    "openPRs": 3,
     "plannedStacks": 8,
     "unitTests": 163
   },
@@ -45,8 +45,8 @@
       "issue": 11588,
       "pr": 12085,
       "branch": "fix/nmcli-bond-arp-diff-11588",
-      "status": "open",
-      "statusLabel": "PR Open",
+      "status": "merged",
+      "statusLabel": "Merged",
       "repo": "ansible-collections/community.general",
       "fork": "AsifAd/community.general",
       "summary": "Bond connections with arp_interval and arp_ip_target reported changed on every run due to key name mismatch between show and compare paths.",
@@ -66,8 +66,8 @@
       "issue": 27928,
       "pr": 27931,
       "branch": "fix/appset-ui-namespaced-27928",
-      "status": "open",
-      "statusLabel": "PR Open",
+      "status": "merged",
+      "statusLabel": "Merged",
       "repo": "argoproj/argo-cd",
       "fork": "AsifAd/argo-cd",
       "summary": "Fixed UI sending appNamespace instead of appsetNamespace on ApplicationSet GET/watch/resource-tree — namespaced AppSet detail view failed to load.",
@@ -131,7 +131,7 @@
       "nextUp": "Keycloak #11747 — email_verified idempotency + check mode",
       "fork": "https://github.com/AsifAd/community.general",
       "docs": "ansible/README.md",
-      "openPRs": 2
+      "openPRs": 1
     },
     {
       "tech": "argocd",
@@ -139,10 +139,10 @@
       "status": "active",
       "icon": "🔄",
       "color": "#EF7B4D",
-      "nextUp": "Await review — #27931 namespaced UI, #27932 Refresh",
+      "nextUp": "Await review — #27932 Refresh",
       "fork": "https://github.com/AsifAd/argo-cd",
       "docs": "argocd/README.md",
-      "openPRs": 2
+      "openPRs": 1
     },
     {
       "tech": "jenkins",
@@ -243,15 +243,15 @@
     {
       "date": "2026-05",
       "title": "Argo CD AppSet UI fix #27931",
-      "description": "Opened PR fixing namespaced ApplicationSet detail view — appsetNamespace query params.",
-      "type": "pr",
+      "description": "Merged PR fixing namespaced ApplicationSet detail view — appsetNamespace query params.",
+      "type": "merged",
       "link": "https://github.com/argoproj/argo-cd/pull/27931"
     },
     {
       "date": "2026-05",
       "title": "nmcli bond ARP fix",
-      "description": "Opened PR #12085 with 163 unit tests — check mode and diff idempotency for bond ARP options.",
-      "type": "pr",
+      "description": "Merged PR #12085 with 163 unit tests — check mode and diff idempotency for bond ARP options.",
+      "type": "merged",
       "link": "https://github.com/ansible-collections/community.general/pull/12085"
     },
     {
