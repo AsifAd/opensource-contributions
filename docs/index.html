@@ -39,7 +39,6 @@
         <div class="nav-links" id="nav-links" data-testid="nav-links">
           <a href="#contributions">Contributions</a>
           <a href="#roadmap">Roadmap</a>
-          <a href="#timeline">Timeline</a>
         </div>
 
         <div class="nav-actions">
@@ -88,11 +87,13 @@
 
         <aside class="hero-aside reveal" data-delay="200">
           <div class="hero-panel">
-            <p class="panel-label">Quick jump</p>
+            <div class="window-controls">
+              <span></span><span></span><span></span>
+            </div>
+            <p class="panel-label" style="margin-top: 0.2rem;">Quick jump</p>
             <nav class="quick-nav" aria-label="Page sections">
               <a href="#contributions"><span>01</span> Active PRs</a>
               <a href="#roadmap"><span>02</span> Tech roadmap</a>
-              <a href="#timeline"><span>03</span> Timeline</a>
             </nav>
           </div>
         </aside>
@@ -150,20 +151,12 @@
       </div>
     </section>
 
-    <section class="section" id="timeline" data-testid="section-timeline">
-      <div class="container">
-        <header class="section-header reveal">
-          <p class="section-tag">03 · Journey</p>
-          <h2 class="section-title">Timeline</h2>
-          <p class="section-desc">Key milestones and what's coming next.</p>
-        </header>
-        <div class="timeline" id="timeline-list"></div>
-      </div>
-    </section>
-
     <section class="section cta-section">
       <div class="container">
         <div class="cta-card reveal">
+          <div class="window-controls" style="justify-content: center; margin-bottom: 1.5rem;">
+            <span></span><span></span><span></span>
+          </div>
           <h2>Building in public</h2>
           <p>Every fix starts with a reproducible bug and an isolated dev environment. Docs live in the repo; this page is the overview.</p>
           <div class="cta-actions">

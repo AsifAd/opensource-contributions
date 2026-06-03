@@ -38,7 +38,6 @@ async function init() {
     const data = await res.json();
     renderContributions(data.contributions);
     renderRoadmap(data.roadmap);
-    renderTimeline(data.timeline);
     updateStats(data.stats, data.roadmap);
     updateMeta(data.meta, data.stats, data.contributions, data.roadmap);
   } catch (err) {
@@ -169,23 +168,6 @@ function initFilters() {
   });
 }
 
-// ── Timeline ────────────────────────────────────────────────────────────────
-function renderTimeline(timeline) {
-  const list = document.getElementById('timeline-list');
-  if (!list) return;
-
-  list.innerHTML = timeline.map(item => `
-    <div class="timeline-item type-${item.type}" data-testid="timeline-${item.type}-${item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}">
-      <div class="timeline-date">${item.date}</div>
-      <h3 class="timeline-title">${item.title}</h3>
-      <p class="timeline-desc">${item.description}</p>
-      ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="timeline-link">View</a>` : ''}
-    </div>
-  `).join('');
-
-  observeTimeline(list.querySelectorAll('.timeline-item'));
-}
-
 // ── Scroll reveals ──────────────────────────────────────────────────────────
 function observeReveals(elements) {
   const pending = elements.length
@@ -206,22 +188,6 @@ function observeReveals(elements) {
   );
 
   pending.forEach(el => observer.observe(el));
-}
-
-function observeTimeline(items) {
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  items.forEach(el => observer.observe(el));
 }
 
 // ── Counter animation ───────────────────────────────────────────────────────
@@ -278,7 +244,7 @@ function initNav() {
 // ── Active section highlight ────────────────────────────────────────────────
 function initSectionHighlight() {
   const navLinks = document.querySelectorAll('.nav-links a, .quick-nav a');
-  const sections = ['contributions', 'roadmap', 'timeline']
+  const sections = ['contributions', 'roadmap']
     .map(id => document.getElementById(id))
     .filter(Boolean);
 

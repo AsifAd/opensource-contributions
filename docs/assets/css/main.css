@@ -365,6 +365,23 @@ a { color: inherit; text-decoration: none; }
   transition: var(--transition-theme);
 }
 
+.window-controls {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.window-controls span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+
+.window-controls span:nth-child(1) { background: #ef4444; opacity: 0.8; }
+.window-controls span:nth-child(2) { background: #eab308; opacity: 0.8; }
+.window-controls span:nth-child(3) { background: #22c55e; opacity: 0.8; }
+
 .panel-label {
   font-family: var(--font-mono);
   font-size: 0.65rem;
@@ -805,88 +822,6 @@ a { color: inherit; text-decoration: none; }
 
 .roadmap-docs-link:hover { text-decoration: underline; }
 
-/* ── Timeline ── */
-.timeline {
-  position: relative;
-  padding-left: 1.5rem;
-  max-width: 640px;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 4px;
-  bottom: 4px;
-  width: 1px;
-  background: var(--border-strong);
-}
-
-.timeline-item {
-  position: relative;
-  padding: 0 0 2rem 1.5rem;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
-}
-
-.timeline-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -1.5rem;
-  top: 0.45rem;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 2px solid var(--accent);
-  transform: translateX(-4px);
-}
-
-.timeline-item.type-pr::before { border-color: var(--accent); }
-.timeline-item.type-merged::before { 
-  border-color: var(--success); 
-  background: var(--success-soft);
-}
-.timeline-item.type-planned::before {
-  border-color: var(--warn);
-  border-style: dashed;
-}
-
-.timeline-date {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--accent);
-  margin-bottom: 0.3rem;
-}
-
-.timeline-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-}
-
-.timeline-desc {
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  line-height: 1.55;
-}
-
-.timeline-link {
-  display: inline-block;
-  margin-top: 0.4rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--accent);
-}
-
-.timeline-link:hover { text-decoration: underline; }
-
 /* ── CTA ── */
 .cta-section { padding-bottom: 3.5rem; }
 
@@ -1061,7 +996,7 @@ a { color: inherit; text-decoration: none; }
     transition-duration: 0.01ms !important;
   }
 
-  .reveal, .timeline-item {
+  .reveal {
     opacity: 1;
     transform: none;
   }
