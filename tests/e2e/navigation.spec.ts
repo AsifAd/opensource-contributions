@@ -10,7 +10,6 @@ test.describe("navigation", () => {
     const items = [
       { label: "Contributions", id: "contributions" },
       { label: "Roadmap", id: "roadmap" },
-      { label: "Timeline", id: "timeline" },
     ];
 
     for (const it of items) {
@@ -36,7 +35,6 @@ test.describe("navigation", () => {
     const jumps = [
       { name: "Active PRs", id: "contributions" },
       { name: "Tech roadmap", id: "roadmap" },
-      { name: "Timeline", id: "timeline" },
     ];
 
     for (const j of jumps) {

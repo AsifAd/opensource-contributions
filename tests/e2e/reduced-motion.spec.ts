@@ -13,8 +13,6 @@ test("renders all dynamic sections with prefers-reduced-motion", async ({ page }
   await expect(page.getByTestId("section-hero")).toBeVisible();
   await expect(page.getByTestId("section-contributions")).toBeVisible();
   await expect(page.getByTestId("section-roadmap")).toBeVisible();
-  await expect(page.getByTestId("section-timeline")).toBeVisible();
-
   await expect(page.getByTestId("contrib-ini-file-11919")).toBeVisible();
   await expect(page.getByTestId("roadmap-ansible")).toBeVisible();
 });

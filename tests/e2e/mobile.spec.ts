@@ -15,7 +15,7 @@ test.describe("mobile navigation", () => {
     await expect(navLinks).toHaveClass(/open/);
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
 
-    await navLinks.getByRole("link", { name: "Timeline" }).click();
+    await navLinks.getByRole("link", { name: "Roadmap" }).click();
     await expect(navLinks).not.toHaveClass(/open/);
   });
 

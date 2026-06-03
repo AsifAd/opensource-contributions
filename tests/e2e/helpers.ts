@@ -25,6 +25,7 @@ export type ContributionsData = {
     module: string;
     pr: number;
     issue: number;
+    status: string;
     statusLabel: string;
     summary: string;
     highlights?: string[];
@@ -81,4 +82,4 @@ export async function clearThemeStorage(page: import("@playwright/test").Page) {
   });
 }
 
-export const SECTION_IDS = ["contributions", "roadmap", "timeline"] as const;
+export const SECTION_IDS = ["contributions", "roadmap"] as const;
